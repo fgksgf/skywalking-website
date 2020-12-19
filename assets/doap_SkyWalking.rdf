@@ -37,8 +37,8 @@
     <release>
       <Version>
         <name>Apache SkyWalking</name>
-        <created>2020-03-22</created>
-        <revision>7.0.0</revision>
+        <created>2020-10-27</created>
+        <revision>8.2.0</revision>
       </Version>
     </release>
     <repository>
