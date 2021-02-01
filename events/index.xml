@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apache SkyWalking – Events</title>
-    <link>https://skywalking.apache.org/events/</link>
+    <link>/events/</link>
     <description>Recent content in Events on Apache SkyWalking</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://skywalking.apache.org/events/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="/events/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,15 +14,166 @@
     
     
     <item>
-      <title>Events: Welcome Gui Cao as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-gui-cao-as-new-committer/</link>
-      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      <title>Events: Release Apache SkyWalking Cloud on Kubernetes 0.2.0</title>
+      <link>/events/release-apache-skywalking-cloud-on-kubernetes-0-2-0/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-gui-cao-as-new-committer/</guid>
+      <guid>/events/release-apache-skywalking-cloud-on-kubernetes-0-2-0/</guid>
       <description>
         
         
-        &lt;p&gt;Gui Cao begun the code contributions since May 3, 2020.
+        &lt;p&gt;SkyWalking Cloud on Kubernetes 0.2.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Introduce custom metrics adapter to SkyWalking OAP cluster for Kubernetes HPA autoscaling.&lt;/li&gt;
+&lt;li&gt;Add RBAC files and service account to support Kubernetes coordination.&lt;/li&gt;
+&lt;li&gt;Add default and validation webhooks to operator controllers.&lt;/li&gt;
+&lt;li&gt;Add UI CRD to deploy skywalking UI server.&lt;/li&gt;
+&lt;li&gt;Add Fetcher CRD to fetch metrics from other telemetry system, for example, Prometheus.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking Client JS 0.3.0</title>
+      <link>/events/release-apache-skywalking-client-js-0-3-0/</link>
+      <pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/events/release-apache-skywalking-client-js-0-3-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking Client JS 0.3.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Support tracing starting at the browser.&lt;/li&gt;
+&lt;li&gt;Add traceSDKInternal SDK for tracing SDK internal RPC.&lt;/li&gt;
+&lt;li&gt;Add detailMode SDK for tracing http method and url as tags in spans.&lt;/li&gt;
+&lt;li&gt;Fix conditions of http status.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking Eyes 0.1.0</title>
+      <link>/events/release-apache-skywalking-eyes-0-1-0/</link>
+      <pubDate>Tue, 12 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/events/release-apache-skywalking-eyes-0-1-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking Eyes 0.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;License Header
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;check&lt;/code&gt; and &lt;code&gt;fix&lt;/code&gt; command.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;check&lt;/code&gt; results can be reported to pull request as comments.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fix&lt;/code&gt; suggestions can be filed on pull request as edit suggestions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking for NodeJS 0.1.0</title>
+      <link>/events/release-apache-skywalking-nodejs-0-1-0/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/events/release-apache-skywalking-nodejs-0-1-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking NodeJS 0.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Initialize project core codes.&lt;/li&gt;
+&lt;li&gt;Built-in http/https plugin.&lt;/li&gt;
+&lt;li&gt;Express plugin.&lt;/li&gt;
+&lt;li&gt;Axios plugin.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking Python 0.5.0</title>
+      <link>/events/release-apache-skywalking-python-0-5-0/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/events/release-apache-skywalking-python-0-5-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking Python 0.5.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;New plugins&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pyramid Plugin (#102)&lt;/li&gt;
+&lt;li&gt;AioHttp Plugin (#101)&lt;/li&gt;
+&lt;li&gt;Sanic Plugin (#91)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API and enhancements&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@trace&lt;/code&gt; decorator supports &lt;code&gt;async&lt;/code&gt; functions&lt;/li&gt;
+&lt;li&gt;Supports async task context&lt;/li&gt;
+&lt;li&gt;Optimized path trace ignore&lt;/li&gt;
+&lt;li&gt;Moved exception check to &lt;code&gt;Span.__exit__&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Moved Method &amp;amp; Url tags before requests&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fixes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;BaseExceptions&lt;/code&gt; not recorded as errors&lt;/li&gt;
+&lt;li&gt;Allow pending data to send before exit&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sw_flask&lt;/code&gt; general exceptions handled&lt;/li&gt;
+&lt;li&gt;Make &lt;code&gt;skywalking&lt;/code&gt; logging Non-global&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chores and tests&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make tests really run on specified Python version&lt;/li&gt;
+&lt;li&gt;Deprecate 3.5 as it&amp;rsquo;s EOL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Welcome Ke Zhang (张可) as new committer</title>
+      <link>/events/welcome-ke-zhang-as-new-committer/</link>
+      <pubDate>Sun, 20 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/events/welcome-ke-zhang-as-new-committer/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Ke Zhang (a.k.a. &lt;a href=&#34;https://github.com/HumbertZhang&#34;&gt;HumbertZhang&lt;/a&gt;) mainly focuses on the SkyWalking Python agent, he had participated in the &amp;ldquo;Open Source Promotion Plan - Summer 2020&amp;rdquo; and completed the project smoothly, and won the award &amp;ldquo;Most Potential Students&amp;rdquo; that shows his great willingness to continuously contribute to our community.&lt;/p&gt;
+&lt;p&gt;Up to date, he has submitted 8 PRs in the &lt;a href=&#34;https://github.com/apache/skywalking-python/commits?author=Humbertzhang&#34;&gt;Python agent repository&lt;/a&gt;, 7 PRs in the &lt;a href=&#34;https://github.com/apache/skywalking/commits?author=Humbertzhang&#34;&gt;main repo&lt;/a&gt;, all in total include ~2000 LOC.&lt;/p&gt;
+&lt;p&gt;At Dec. 13th, 2020, the project management committee (PMC) passed the proposal of promoting him as a new committer. He has accepted the invitation at the same day.&lt;/p&gt;
+&lt;p&gt;Welcome to join the committer team, Ke Zhang!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Welcome Gui Cao as new committer</title>
+      <link>/events/welcome-gui-cao-as-new-committer/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/events/welcome-gui-cao-as-new-committer/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Gui Cao began the code contributions since May 3, 2020.
 In the past 6 months, his 23 pull requests(GitHub, zifeihan[1]) have been accepted, which includes 5k+ lines of codes.&lt;/p&gt;
 &lt;p&gt;Meanwhile, he took part in the tech discussion, and show the interests to contribute more to the project.&lt;/p&gt;
 &lt;p&gt;At Dec. 4th, 2020, the project management committee(PMC) passed the proposal of promoting him as a new committer.
@@ -35,14 +186,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 8.3.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skwaylking-apm-8-3-0/</link>
+      <link>/events/release-apache-skwaylking-apm-8-3-0/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skwaylking-apm-8-3-0/</guid>
+      <guid>/events/release-apache-skwaylking-apm-8-3-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking 8.3.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking 8.3.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Test: ElasticSearch version 7.0.0 and 7.9.3 as storage are E2E tested.&lt;/li&gt;
@@ -126,10 +277,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking CLI 0.5.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-5-0/</link>
+      <link>/events/release-apache-skywalking-cli-0-5-0/</link>
       <pubDate>Sun, 29 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-5-0/</guid>
+      <guid>/events/release-apache-skywalking-cli-0-5-0/</guid>
       <description>
         
         
@@ -166,14 +317,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Python 0.4.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-python-0-4-0/</link>
+      <link>/events/release-apache-skywalking-python-0-4-0/</link>
       <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-python-0-4-0/</guid>
+      <guid>/events/release-apache-skywalking-python-0-4-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Python 0.4.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Python 0.4.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Feature: Support Kafka reporter protocol (#74)&lt;/li&gt;
 &lt;li&gt;BugFix: Move generated packages into skywalking namespace to avoid conflicts (#72)&lt;/li&gt;
@@ -186,14 +337,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Client JS 0.2.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-client-js-0.2.0/</link>
+      <link>/events/release-apache-skywalking-client-js-0.2.0/</link>
       <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-client-js-0.2.0/</guid>
+      <guid>/events/release-apache-skywalking-client-js-0.2.0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Client JS 0.2.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Client JS 0.2.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Bug Fixes
 &lt;ul&gt;
@@ -208,14 +359,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Cloud on Kubernetes 0.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cloud-on-kubernetes-0.1.0/</link>
+      <link>/events/release-apache-skywalking-cloud-on-kubernetes-0.1.0/</link>
       <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cloud-on-kubernetes-0.1.0/</guid>
+      <guid>/events/release-apache-skywalking-cloud-on-kubernetes-0.1.0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Cloud on Kubernetes 0.1.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Cloud on Kubernetes 0.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Add OAPServer CRDs and controller.&lt;/li&gt;
 &lt;/ul&gt;
@@ -225,10 +376,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Jiapeng Liu as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-jiapeng-liu-as-new-committer/</link>
+      <link>/events/welcome-jiapeng-liu-as-new-committer/</link>
       <pubDate>Thu, 05 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-jiapeng-liu-as-new-committer/</guid>
+      <guid>/events/welcome-jiapeng-liu-as-new-committer/</guid>
       <description>
         
         
@@ -239,14 +390,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Kubernetes Helm Chart 4.0.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-kubernetes-helm-chart-4.0.0/</link>
+      <link>/events/release-apache-skywalking-kubernetes-helm-chart-4.0.0/</link>
       <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-kubernetes-helm-chart-4.0.0/</guid>
+      <guid>/events/release-apache-skywalking-kubernetes-helm-chart-4.0.0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Kubernetes Helm Chart 4.0.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Kubernetes Helm Chart 4.0.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Allow overriding configurations files under /skywalking/config.&lt;/li&gt;
 &lt;li&gt;Unify the usages of different SkyWalking versions.&lt;/li&gt;
@@ -259,14 +410,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Client JS 0.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-client-js0.1.0/</link>
+      <link>/events/release-apache-skywalking-client-js0.1.0/</link>
       <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-client-js0.1.0/</guid>
+      <guid>/events/release-apache-skywalking-client-js0.1.0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Client JS 0.1.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Client JS 0.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Support Browser Side Monitoring. Require SkyWalking APM 8.2+.&lt;/li&gt;
 &lt;/ul&gt;
@@ -276,14 +427,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 8.2.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-2-0/</link>
+      <link>/events/release-apache-skywalking-apm-8-2-0/</link>
       <pubDate>Tue, 27 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-2-0/</guid>
+      <guid>/events/release-apache-skywalking-apm-8-2-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking 8.2.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking 8.2.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Support Browser monitoring.&lt;/li&gt;
@@ -398,14 +549,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking LUA Nginx 0.3.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-lua-nginx-0.3.0/</link>
+      <link>/events/release-apache-skywalking-lua-nginx-0.3.0/</link>
       <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-lua-nginx-0.3.0/</guid>
+      <guid>/events/release-apache-skywalking-lua-nginx-0.3.0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking LUA Nginx 0.3.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking LUA Nginx 0.3.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Load the &lt;code&gt;base64&lt;/code&gt; module in &lt;code&gt;utils&lt;/code&gt;, different ENV use different library.&lt;/li&gt;
 &lt;li&gt;Add prefix &lt;code&gt;skywalking&lt;/code&gt;, avoid conflicts with other lua libraries.&lt;/li&gt;
@@ -420,14 +571,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking CLI 0.4.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-4-0/</link>
+      <link>/events/release-apache-skywalking-cli-0-4-0/</link>
       <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-4-0/</guid>
+      <guid>/events/release-apache-skywalking-cli-0-4-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking CLI 0.4.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking CLI 0.4.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Features
 &lt;ul&gt;
@@ -448,29 +599,32 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Events: Welcome Huaxi Jiang as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-huaxi-jiang-as-new-committer/</link>
+      <title>Events: Welcome Huaxi Jiang (江华禧) as new committer</title>
+      <link>/events/welcome-huaxi-jiang-as-new-committer/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-huaxi-jiang-as-new-committer/</guid>
+      <guid>/events/welcome-huaxi-jiang-as-new-committer/</guid>
       <description>
         
         
-        &lt;p&gt;Based on his continuous contributions, Huaxi Jiang (a.k.a &lt;a href=&#34;https://github.com/fgksgf&#34;&gt;fgksgf&lt;/a&gt;) has been voted as a new committer.&lt;/p&gt;
+        &lt;p&gt;Huaxi Jiang (江华禧) (a.k.a. &lt;a href=&#34;https://github.com/fgksgf&#34;&gt;fgksgf&lt;/a&gt;) mainly focuses on the SkyWalking CLI project, he had participated in the &amp;ldquo;Open Source Promotion Plan - Summer 2020&amp;rdquo; and completed the project smoothly, and won the award &amp;ldquo;Most Potential Students&amp;rdquo; that shows his great willingness to continuously contribute to our community.&lt;/p&gt;
+&lt;p&gt;Up to date, he has submitted 26 PRs in the &lt;a href=&#34;https://github.com/apache/skywalking-cli/commits?author=fgksgf&#34;&gt;CLI repository&lt;/a&gt;, 3 PRs in the &lt;a href=&#34;https://github.com/apache/skywalking/commits?author=fgksgf&#34;&gt;main repo&lt;/a&gt;, all in total include ~4000 LOC.&lt;/p&gt;
+&lt;p&gt;At Sep. 28th, 2020, the project management committee (PMC) passed the proposal of promoting him as a new committer. He has accepted the invitation at the same day.&lt;/p&gt;
+&lt;p&gt;Welcome to join the committer team, Huaxi!&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Events: Release Apache SkyWalking Python 0.3.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-python-0-3-0/</link>
+      <link>/events/release-apache-skywalking-python-0-3-0/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-python-0-3-0/</guid>
+      <guid>/events/release-apache-skywalking-python-0-3-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Python 0.3.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Python 0.3.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;New plugins&lt;/p&gt;
@@ -511,14 +665,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Chart 3.1.0 for SkyWalking 8.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-chart-3-1-0-for-skywalking-8-1-0/</link>
+      <link>/events/release-apache-skywalking-chart-3-1-0-for-skywalking-8-1-0/</link>
       <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-chart-3-1-0-for-skywalking-8-1-0/</guid>
+      <guid>/events/release-apache-skywalking-chart-3-1-0-for-skywalking-8-1-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Chart 3.1.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Chart 3.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Support SkyWalking 8.1.0&lt;/li&gt;
 &lt;li&gt;Support enable oap dynamic configuration through k8s configmap&lt;/li&gt;
@@ -529,14 +683,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 8.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-1-0/</link>
+      <link>/events/release-apache-skywalking-apm-8-1-0/</link>
       <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-1-0/</guid>
+      <guid>/events/release-apache-skywalking-apm-8-1-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking APM 8.1.0 is release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking APM 8.1.0 is release. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Support Kafka as an optional trace, JVM metrics, profiling snapshots and meter system data transport layer.&lt;/li&gt;
@@ -614,10 +768,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Wei Hua as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-wei-hua-as-new-committer/</link>
+      <link>/events/welcome-wei-hua-as-new-committer/</link>
       <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-wei-hua-as-new-committer/</guid>
+      <guid>/events/welcome-wei-hua-as-new-committer/</guid>
       <description>
         
         
@@ -628,14 +782,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Python 0.2.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-python-0-2-0/</link>
+      <link>/events/release-apache-skywalking-python-0-2-0/</link>
       <pubDate>Tue, 28 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-python-0-2-0/</guid>
+      <guid>/events/release-apache-skywalking-python-0-2-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Python 0.2.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Python 0.2.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Plugins:&lt;/p&gt;
@@ -671,14 +825,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking CLI 0.3.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-3-0/</link>
+      <link>/events/release-apache-skywalking-cli-0-3-0/</link>
       <pubDate>Mon, 27 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-3-0/</guid>
+      <guid>/events/release-apache-skywalking-cli-0-3-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking CLI 0.3.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking CLI 0.3.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Command: health check command&lt;/li&gt;
 &lt;li&gt;Command: Add trace command&lt;/li&gt;
@@ -690,14 +844,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Python 0.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-python-0-1-0/</link>
+      <link>/events/release-apache-skywalking-python-0-1-0/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-python-0-1-0/</guid>
+      <guid>/events/release-apache-skywalking-python-0-1-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Python 0.1.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Python 0.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;API: agent core APIs, check &lt;a href=&#34;https://github.com/apache/skywalking-python/blob/3892cab9d5d2c03107cfb2b1c59a6c77c5c3cc35/README.md#api&#34;&gt;the APIs and the examples&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Plugin: built-in libraries &lt;code&gt;http&lt;/code&gt;, &lt;code&gt;urllib.request&lt;/code&gt; and third-party library &lt;code&gt;requests&lt;/code&gt; are supported.&lt;/li&gt;
@@ -709,14 +863,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Chart 3.0.0 for SkyWalking 8.0.1</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-chart-3-0-0-for-skywalking-8-0-1/</link>
+      <link>/events/release-apache-skywalking-chart-3-0-0-for-skywalking-8-0-1/</link>
       <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-chart-3-0-0-for-skywalking-8-0-1/</guid>
+      <guid>/events/release-apache-skywalking-chart-3-0-0-for-skywalking-8-0-1/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Chart 3.0.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Chart 3.0.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Support SkyWalking 8.0.1&lt;/li&gt;
 &lt;/ul&gt;
@@ -726,14 +880,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Relase Apache SkyWalking Nginx LUA 0.2.0</title>
-      <link>https://skywalking.apache.org/events/relase-apache-skywalking-nginx-lua-0-2-0/</link>
+      <link>/events/relase-apache-skywalking-nginx-lua-0-2-0/</link>
       <pubDate>Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/relase-apache-skywalking-nginx-lua-0-2-0/</guid>
+      <guid>/events/relase-apache-skywalking-nginx-lua-0-2-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Nginx LUA 0.2.0 is release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Nginx LUA 0.2.0 is release. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Adapt the new v3 protocol.&lt;/li&gt;
 &lt;li&gt;Implement correlation protocol.&lt;/li&gt;
@@ -745,14 +899,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 8.0.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-0-0/</link>
+      <link>/events/release-apache-skywalking-apm-8-0-0/</link>
       <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-0-0/</guid>
+      <guid>/events/release-apache-skywalking-apm-8-0-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking APM 8.0.0 is release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking APM 8.0.0 is release. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;v3 protocol is added and implemented. All previous releases are incompatible with 8.x releases.&lt;/li&gt;
@@ -819,10 +973,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Wei Zhang to join the PMC</title>
-      <link>https://skywalking.apache.org/events/welcome-wei-zhang-to-join-the-pmc/</link>
+      <link>/events/welcome-wei-zhang-to-join-the-pmc/</link>
       <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-wei-zhang-to-join-the-pmc/</guid>
+      <guid>/events/welcome-wei-zhang-to-join-the-pmc/</guid>
       <description>
         
         
@@ -833,14 +987,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Chart 2.0.0 for SkyWalking 7.0.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-chart-2-0-0-for-skywalking-7-0-0/</link>
+      <link>/events/release-apache-skywalking-chart-2-0-0-for-skywalking-7-0-0/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-chart-2-0-0-for-skywalking-7-0-0/</guid>
+      <guid>/events/release-apache-skywalking-chart-2-0-0-for-skywalking-7-0-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Chart 2.0.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Chart 2.0.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Support SkyWalking 7.0.0&lt;/li&gt;
 &lt;li&gt;Support set ES user/password&lt;/li&gt;
@@ -852,14 +1006,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 7.0.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-7-0-0/</link>
+      <link>/events/release-apache-skywalking-apm-7-0-0/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-7-0-0/</guid>
+      <guid>/events/release-apache-skywalking-apm-7-0-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking APM 7.0.0 is release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking APM 7.0.0 is release. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Upgrade JDK minimal JDK requirement to JDK8&lt;/li&gt;
 &lt;li&gt;Support profiling code level performance&lt;/li&gt;
@@ -871,14 +1025,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking CLI 0.2.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-2-0/</link>
+      <link>/events/release-apache-skywalking-cli-0-2-0/</link>
       <pubDate>Fri, 20 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-2-0/</guid>
+      <guid>/events/release-apache-skywalking-cli-0-2-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking CLI 0.2.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking CLI 0.2.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Support visualization of heat map&lt;/li&gt;
 &lt;li&gt;Support top N entities, &lt;code&gt;swctl metrics top 5 --name service_sla&lt;/code&gt;&lt;/li&gt;
@@ -891,14 +1045,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Chart 1.1.0 for SkyWalking 6.6.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-chart-1-1-0-for-skywalking-6-6-0/</link>
+      <link>/events/release-apache-skywalking-chart-1-1-0-for-skywalking-6-6-0/</link>
       <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-chart-1-1-0-for-skywalking-6-6-0/</guid>
+      <guid>/events/release-apache-skywalking-chart-1-1-0-for-skywalking-6-6-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Chart 1.1.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Chart 1.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Support SkyWalking 6.6.0&lt;/li&gt;
 &lt;li&gt;Support deploy Elasticsearch 7&lt;/li&gt;
@@ -910,10 +1064,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: SkyWalking Nginx LUA 0.1.0 release</title>
-      <link>https://skywalking.apache.org/events/skywalking-nginx-lua-0-1-0-release/</link>
+      <link>/events/skywalking-nginx-lua-0-1-0-release/</link>
       <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/skywalking-nginx-lua-0-1-0-release/</guid>
+      <guid>/events/skywalking-nginx-lua-0-1-0-release/</guid>
       <description>
         
         
@@ -924,10 +1078,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Ming Wen as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-ming-wen-as-new-committer/</link>
+      <link>/events/welcome-ming-wen-as-new-committer/</link>
       <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-ming-wen-as-new-committer/</guid>
+      <guid>/events/welcome-ming-wen-as-new-committer/</guid>
       <description>
         
         
@@ -938,10 +1092,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Haochao Zhuang to join the PMC</title>
-      <link>https://skywalking.apache.org/events/welcome-haochao-zhuang-to-join-the-pmc/</link>
+      <link>/events/welcome-haochao-zhuang-to-join-the-pmc/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-haochao-zhuang-to-join-the-pmc/</guid>
+      <guid>/events/welcome-haochao-zhuang-to-join-the-pmc/</guid>
       <description>
         
         
@@ -952,10 +1106,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Zhusheng Xu as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-zhusheng-xu-as-new-committer/</link>
+      <link>/events/welcome-zhusheng-xu-as-new-committer/</link>
       <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-zhusheng-xu-as-new-committer/</guid>
+      <guid>/events/welcome-zhusheng-xu-as-new-committer/</guid>
       <description>
         
         
@@ -966,10 +1120,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Han Liu as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-han-liu-as-new-committer/</link>
+      <link>/events/welcome-han-liu-as-new-committer/</link>
       <pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-han-liu-as-new-committer/</guid>
+      <guid>/events/welcome-han-liu-as-new-committer/</guid>
       <description>
         
         
@@ -980,10 +1134,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Hongwei Zhai to join the PMC</title>
-      <link>https://skywalking.apache.org/events/welcome-hongwei-zhai-to-join-the-pmc/</link>
+      <link>/events/welcome-hongwei-zhai-to-join-the-pmc/</link>
       <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-hongwei-zhai-to-join-the-pmc/</guid>
+      <guid>/events/welcome-hongwei-zhai-to-join-the-pmc/</guid>
       <description>
         
         
@@ -994,14 +1148,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 6.6.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-6-0/</link>
+      <link>/events/release-apache-skywalking-apm-6-6-0/</link>
       <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-6-0/</guid>
+      <guid>/events/release-apache-skywalking-apm-6-6-0/</guid>
       <description>
         
         
-        &lt;p&gt;Apache APM 6.6.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;Apache APM 6.6.0 release. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Service Instance dependency detection are available.&lt;/li&gt;
 &lt;li&gt;Support ElasticSearch 7 as a storage option.&lt;/li&gt;
@@ -1013,14 +1167,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking Chart 1.0.0 for SkyWalking 6.5.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-chart-1-0-0-for-skywalking-6-5-0/</link>
+      <link>/events/release-apache-skywalking-chart-1-0-0-for-skywalking-6-5-0/</link>
       <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-chart-1-0-0-for-skywalking-6-5-0/</guid>
+      <guid>/events/release-apache-skywalking-chart-1-0-0-for-skywalking-6-5-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking Chart 1.0.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking Chart 1.0.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Deploy SkyWalking 6.5.0 by Chart.&lt;/li&gt;
 &lt;li&gt;Elasticsearch deploy optional.&lt;/li&gt;
@@ -1031,14 +1185,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking CLI 0.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-1-0/</link>
+      <link>/events/release-apache-skywalking-cli-0-1-0/</link>
       <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-1-0/</guid>
+      <guid>/events/release-apache-skywalking-cli-0-1-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking CLI 0.1.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking CLI 0.1.0 is released. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Add command &lt;code&gt;swctl service&lt;/code&gt; to list services&lt;/li&gt;
 &lt;li&gt;Add command &lt;code&gt;swctl instance&lt;/code&gt; and &lt;code&gt;swctl search&lt;/code&gt; to list and search instances of service.&lt;/li&gt;
@@ -1052,10 +1206,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Weiyi Liu as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-weiyi-liu-as-new-committer/</link>
+      <link>/events/welcome-weiyi-liu-as-new-committer/</link>
       <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-weiyi-liu-as-new-committer/</guid>
+      <guid>/events/welcome-weiyi-liu-as-new-committer/</guid>
       <description>
         
         
@@ -1066,10 +1220,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Lang Li as a new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-lang-li-as-a-new-committer/</link>
+      <link>/events/welcome-lang-li-as-a-new-committer/</link>
       <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-lang-li-as-a-new-committer/</guid>
+      <guid>/events/welcome-lang-li-as-a-new-committer/</guid>
       <description>
         
         
@@ -1080,10 +1234,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Qiuxia Fan as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-qiuxia-fan-as-new-committer/</link>
+      <link>/events/welcome-qiuxia-fan-as-new-committer/</link>
       <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-qiuxia-fan-as-new-committer/</guid>
+      <guid>/events/welcome-qiuxia-fan-as-new-committer/</guid>
       <description>
         
         
@@ -1094,14 +1248,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Release Apache SkyWalking APM 6.5.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-5-0/</link>
+      <link>/events/release-apache-skywalking-apm-6-5-0/</link>
       <pubDate>Fri, 15 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-5-0/</guid>
+      <guid>/events/release-apache-skywalking-apm-6-5-0/</guid>
       <description>
         
         
-        &lt;p&gt;6.5.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;6.5.0 release. Go to &lt;a href=&#34;/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;New metrics comparison view in UI.&lt;/li&gt;
 &lt;li&gt;Dynamic Alert setting supported.&lt;/li&gt;
@@ -1113,10 +1267,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Wei Zhang as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-wei-zhang-as-new-committer/</link>
+      <link>/events/welcome-wei-zhang-as-new-committer/</link>
       <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-wei-zhang-as-new-committer/</guid>
+      <guid>/events/welcome-wei-zhang-as-new-committer/</guid>
       <description>
         
         
@@ -1127,10 +1281,10 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Haochao Zhuang as new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-haochao-zhuang-as-new-committer/</link>
+      <link>/events/welcome-haochao-zhuang-as-new-committer/</link>
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-haochao-zhuang-as-new-committer/</guid>
+      <guid>/events/welcome-haochao-zhuang-as-new-committer/</guid>
       <description>
         
         
@@ -1141,110 +1295,14 @@ He has accepted the invitation at the same day.&lt;/p&gt;
     
     <item>
       <title>Events: Welcome Weijie Zou as a new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-weijie-zou-as-a-new-committer/</link>
+      <link>/events/welcome-weijie-zou-as-a-new-committer/</link>
       <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/welcome-weijie-zou-as-a-new-committer/</guid>
+      <guid>/events/welcome-weijie-zou-as-a-new-committer/</guid>
       <description>
         
         
         &lt;p&gt;Based on his contributions to the skywalking ui project, Weijie Zou (a.k.a &lt;a href=&#34;https://github.com/x22x22&#34;&gt;Kdump&lt;/a&gt;) has been accepted as a new committer.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Release Apache SkyWalking APM 6.4.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-4-0/</link>
-      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-4-0/</guid>
-      <description>
-        
-        
-        &lt;p&gt;6.4.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Highly recommend to upgrade due to Pxx metrics calculation bug.&lt;/li&gt;
-&lt;li&gt;Make agent working in JDK9+ Module system.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Read &lt;a href=&#34;https://github.com/apache/skywalking/blob/master/CHANGES.md&#34;&gt;changelog&lt;/a&gt; for the details.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Welcome Yuguang Zhao to join the PMC</title>
-      <link>https://skywalking.apache.org/events/welcome-yuguang-zhao-to-join-the-pmc/</link>
-      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/welcome-yuguang-zhao-to-join-the-pmc/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Based on his continuous contributions, Yuguang Zhao (a.k.a &lt;a href=&#34;https://github.com/zhaoyuguang&#34;&gt;zhaoyuguang&lt;/a&gt;) has been invited to join the PMC. Welcome aboard.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Welcome Zhenxu Ke to join the PMC</title>
-      <link>https://skywalking.apache.org/events/welcome-zhenxu-ke-to-join-the-pmc/</link>
-      <pubDate>Fri, 23 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/welcome-zhenxu-ke-to-join-the-pmc/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Based on his continuous contributions, Zhenxu Ke (a.k.a &lt;a href=&#34;https://github.com/kezhenxu94&#34;&gt;kezhenxu94&lt;/a&gt;) has been invited to join the PMC. Welcome aboard.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Welcome Yanlong He as a new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-yanlong-he-as-a-new-committer/</link>
-      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/welcome-yanlong-he-as-a-new-committer/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Based on his contributions to the skywalking PHP project, Yanlong He (a.k.a &lt;a href=&#34;https://github.com/heyanlong&#34;&gt;heyanlong&lt;/a&gt; has been accepted as a new committer.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Release Apache SkyWalking APM 6.3.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-3-0/</link>
-      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-3-0/</guid>
-      <description>
-        
-        
-        &lt;p&gt;6.3.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Improve ElasticSearch storage implementation performance again.&lt;/li&gt;
-&lt;li&gt;OAP backend re-install w/o agent reboot required.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Read &lt;a href=&#34;https://github.com/apache/skywalking/blob/master/CHANGES.md&#34;&gt;changelog&lt;/a&gt; for the details.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Release Apache SkyWalking APM 6.2.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-2-0/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-2-0/</guid>
-      <description>
-        
-        
-        &lt;p&gt;6.2.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.
-ElasticSearch storage implementation changed, high reduce payload to ElasticSearch cluster.&lt;/p&gt;
-&lt;p&gt;Read &lt;a href=&#34;https://github.com/apache/skywalking/blob/master/CHANGES.md&#34;&gt;changelog&lt;/a&gt; for the details.&lt;/p&gt;
 
       </description>
     </item>

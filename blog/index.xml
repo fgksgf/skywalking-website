@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apache SkyWalking – Blog</title>
-    <link>https://skywalking.apache.org/blog/</link>
+    <link>/blog/</link>
     <description>Recent content in Blog on Apache SkyWalking</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://skywalking.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,781 @@
     
     
     <item>
+      <title>Blog: [Resolved][License Issue] Tencent Cloud TSW service violates the Apache 2.0 License when using SkyWalking.</title>
+      <link>/blog/2021-01-23-tencent-cloud-violates-aplv2/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021-01-23-tencent-cloud-violates-aplv2/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://skywalking.apache.org&#34;&gt;Apache SkyWalking&lt;/a&gt; is an open source APM for distributed system, Apache Software Foundation top-level project.&lt;/p&gt;
+&lt;p&gt;At Jan. 11th, 2021, we noticed the Tencent Cloud Service, &lt;a href=&#34;https://cloud.tencent.com/product/tsw&#34;&gt;Tencent Service Watcher - TSW&lt;/a&gt;, for first time.
+Due to the similar short name, which SkyWalking is also called SW in the community, we connected with the service team of Tencent Cloud, and kindly asked.&lt;/p&gt;
+&lt;p&gt;They used to replay, &lt;strong&gt;TSW is purely developed by Tencent team itself, which doesn&amp;rsquo;t have any code dependency on SkyWalking.&lt;/strong&gt;. We didn&amp;rsquo;t push harder.&lt;/p&gt;
+&lt;p&gt;But one week later, Jan 18th, 2021, our V.P., Sheng got the report again from Haoyang SkyWalking PMC member, through WeChat DM(direct message),.
+He provided complete evidence to prove TSW actually re-distributed the SkyWalking&amp;rsquo;s Java agent.
+We keep one copy of their agent&amp;rsquo;s distribution(at Jan. 18th), you could be downloaded &lt;a href=&#34;https://drive.google.com/file/d/1wCnUW0n-0qIoHuNI2pw8iAaVyRBrSuI7/view&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Some typically evidences are here&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/apache/skywalking/blob/v8.3.0/apm-sniffer/apm-agent-core/src/main/java/org/apache/skywalking/apm/agent/core/boot/ServiceManager.java&#34;&gt;ServiceManager&lt;/a&gt; is copied and package-name changed in the TSW&amp;rsquo;s agent.
+&lt;img src=&#34;copy1.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/apache/skywalking/blob/v8.3.0/apm-sniffer/apm-agent-core/src/main/java/org/apache/skywalking/apm/agent/core/context/ContextManager.java&#34;&gt;ContextManager&lt;/a&gt; is copied and ackage-name changed in the TSW&amp;rsquo;s agent.
+&lt;img src=&#34;copy2.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At the same time, we checked their tsw-client-package.zip, it didn&amp;rsquo;t include the SkyWalking&amp;rsquo;s LICENSE and NOTICE. Also, they didn&amp;rsquo;t mention TSW agent is the re-ditribution SkyWalking on their website.&lt;/p&gt;
+&lt;p&gt;With all above information, we had enough reason to believe, from the tech perspective, &lt;strong&gt;they were violating the Apache 2.0 License.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;From the 18th Jan., 2021, we sent mail &lt;code&gt;[Apache 2.0 License Violation] Tencent Cloud TSW service doesn&#39;t follow the Apache 2.0 License&lt;/code&gt; to brief the SkyWalking PMC, and
+took the following actions to connect with Tencent.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Made direct call to Tencent Open Source Office.&lt;/li&gt;
+&lt;li&gt;Connected with Tencent Cloud TVP program committee, as Sheng Wu(Our VP) is a Tencent Cloud TVP.&lt;/li&gt;
+&lt;li&gt;Talked with the Tencent Cloud team lead.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;In all above channels, we provided the evidences of coyp-redistribution hebaviors, requested them to revaluate their statements on the website, and follow the License&amp;rsquo;s requirements.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;resolution&#34;&gt;Resolution&lt;/h2&gt;
+&lt;p&gt;At Jan. 19th night, UTC+8, 2021. We received response from the Tencent cloud team. They admited their violation behaviors, and did following changes&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Tencent Cloud TSW service page states, the agent is the fork version(re-distribution) of Apache SkyWalking agent.
+&lt;img src=&#34;tencent-cloud.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TSW agent distributions include the SkyWalking&amp;rsquo;s License and NOTICE. Below is the screenshot, you could download from their product page. We keep a copy of their Jan. 19th 2021 at &lt;a href=&#34;https://drive.google.com/file/d/1Z9EkOpi-lyFosmvuoqPZ57sY-gLdwNLq/view&#34;&gt;here&lt;/a&gt;.
+&lt;img src=&#34;agent.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We have updated the status to the PMC mail list. This license violation issue has been resolved for now.&lt;/p&gt;
+&lt;h5 id=&#34;the-skywalking-community-and-program-management-committee-will-keep-our-eyes-on-tencent-tsw&#34;&gt;The SkyWalking community and program management committee will keep our eyes on Tencent TSW.&lt;/h5&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Response to Elastic 2021 License Change</title>
+      <link>/blog/2021-01-17-elastic-change-license/</link>
+      <pubDate>Sun, 17 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021-01-17-elastic-change-license/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://elastic.co&#34;&gt;Elastic&lt;/a&gt; announced their license change, &lt;a href=&#34;https://www.elastic.co/blog/licensing-change&#34;&gt;&lt;strong&gt;Upcoming licensing changes to Elasticsearch and Kibana&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We are moving our Apache 2.0-licensed source code in Elasticsearch and Kibana to be dual licensed under Server Side Public License (SSPL) and the Elastic License, giving users the choice of which license to apply. This license change ensures our community and customers have free and open access to use, modify, redistribute, and collaborate on the code. It also protects our continued investment in developing products that we distribute for free and in the open by restricting cloud service providers from offering Elasticsearch and Kibana as a service without contributing back. This will apply to all maintained branches of these two products and will take place before our upcoming 7.11 release. Our releases will continue to be under the Elastic License as they have been for the last three years.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Also, they provide the &lt;a href=&#34;https://www.elastic.co/pricing/faq/licensing&#34;&gt;FAQ page&lt;/a&gt; for more information about the impact for the users, developers, and vendors.&lt;/p&gt;
+&lt;p&gt;In the perspective of Apache Software Foundation, SSPL has been confirmed as a Catalog X LICENSE(&lt;a href=&#34;https://www.apache.org/legal/resolved.html#category-x),&#34;&gt;https://www.apache.org/legal/resolved.html#category-x),&lt;/a&gt;
+which means hard-dependency as a part of the core is not allowed.
+With that, we can&amp;rsquo;t only focus on it anymore. We need to consider other storage options. Right now, we still have InfluxDB, TiDB, H2 server still in Apache 2.0 licensed.
+Right now, we still have InfluxDB, TiDB, H2 server as storage options still in Apache 2.0 licensed.&lt;/p&gt;
+&lt;p&gt;As one optional plugin, we need to focus on the client driver license.
+Right now, we are only using ElasticSearch 7.5.0 and 6.3.2 drivers, which are both Apache 2.0 licensed. So, we are safe.
+For further upgrade, here is their announcement. They answer these typical cases in the FAQ page.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I build a SaaS application using Elasticsearch as the backend, how does this affect me?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This source code license change should not affect you - you can use our default distribution or develop applications on top of it for free, under the Elastic License. This source-available license does not contain any copyleft provisions and the default functionality is free of charge. For a specific example, you can see our response to a question around this at Magento.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Our users still could use, redistribute, sale the products/services, based on SkyWalking, even they are using self hosting Elastic Search unmodified server.&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I&amp;rsquo;m using Elasticsearch via APIs, how does this change affect me?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This change does not affect how you use client libraries to access Elasticsearch. Our client libraries remain licensed under
+Apache 2.0, with the exception of our Java High Level Rest Client (Java HLRC).
+The Java HLRC has dependencies on the core of Elasticsearch, and as a result this client library will be licensed under the
+Elastic License. Over time, we will eliminate this dependency and move the Java HLRC to be licensed under Apache 2.0. Until
+that time, for the avoidance of doubt, we do not consider using the Java HLRC as a client library in development of an
+application or library used to access Elasticsearch to constitute a derivative work under the Elastic License, and this will not
+have any impact on how you license the source code of your application using this client library or how you distribute it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The client driver license incompatible issue will exist, we can&amp;rsquo;t upgrade the driver(s) until they release the Apache 2.0 licensed driver jars.&lt;/strong&gt;
+&lt;strong&gt;But users are still safe to upgrade the drivers by themselves.&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Apache SkyWalking will discuss the further actions &lt;a href=&#34;https://github.com/apache/skywalking/issues/6219&#34;&gt;here&lt;/a&gt;. If you have any question, welcome to ask.
+In the later 2021, we will begin to invest the posibility of creating SkyWalking&amp;rsquo;s observability database implementation.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Celebrate SkyWalking single repository hits the 300 contributors mark</title>
+      <link>/blog/2021-01-01-300-contributors-mark/</link>
+      <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021-01-01-300-contributors-mark/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Apache SkyWalking is an open source APM for distributed system. Provide tracing, service mesh observability, metrics analysis, alarm and visualization.&lt;/p&gt;
+&lt;p&gt;Just 11 months ago, on Jan. 20th, 2020, &lt;a href=&#34;http://skywalking.apache.org/blog/2020-01-20-celebrate-200th-contributor/&#34;&gt;SkyWalking hit the 200 contributors mark&lt;/a&gt;.
+With the growth of the project and the community, SkyWalking now includes over 20 sub(ecosystem) projects covering multiple language agents and service mesh,
+integration with mature open source projects, like Prometheus, Spring(Sleuth), hundreds of libraries to support all tracing/metrics/logs fields.
+In the past year, the number of contributors grows super astoundingly , and all its metrics point to its community vibrancy. Many corporate titans are already using
+SkyWalking in a large-scale production environment, including, Alibaba, Huawei, Baidu, Tencent, etc.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;300-contributors.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Recently, our &lt;a href=&#34;https://github.com/apache/skywalking&#34;&gt;SkyWalking main repository&lt;/a&gt; overs 300 contributors.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;website-access.png&#34; alt=&#34;&#34;&gt;
+Our &lt;a href=&#34;https://skywalking.apache.org&#34;&gt;website&lt;/a&gt; has thousands of views from most countries in the world every week.&lt;/p&gt;
+&lt;p&gt;Although we know that, the metrics like GitHub stars and the numbers of open users and contributors, are not a determinant of vibrancy,
+they do show the trend, we are very proud to share the increased numbers here, too.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;community-metrics.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We double those numbers and are honored with the development of our community.&lt;/p&gt;
+&lt;p&gt;Thank you, all of our contributors. Not just these 300 contributors of the main repository, or nearly 400 contributors in all repositories, counted by GitHub.
+There are countless people contributing codes to SkyWalking&amp;rsquo;s subprojects, ecosystem projects, and private fork versions;
+writing blogs and guidances, translating documents, books, and presentations;
+setting up learning sessions for new users;
+convincing friends to join the community as end-users, contributors, even committers.
+Companies behinds those contributors support their employees to work with the community to provide feedback and
+contribute the improvements and features upstream.
+Conference organizers share the stages with speakers from the SkyWalking community.&lt;/p&gt;
+&lt;p&gt;SkyWalking can’t make this happen without your help. You made this community extraordinary.&lt;/p&gt;
+&lt;p&gt;At this crazy distributed computing and cloud native age, we as a community could make DEV, OPS, and SRE teams&amp;rsquo; work easier by locating the issue(s) in the haystack
+quicker than before, like why we named the project as SkyWalking, we will have a clear site line  when you stand on the glass bridge Skywalk at Grand Canyon West.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;376 Contributors counted by GitHub account are following. Dec. 22st, 2020. Generated by a tool deveoped by &lt;a href=&#34;https://github.com/miss-you&#34;&gt;Yousa&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1095071913&lt;/li&gt;
+&lt;li&gt;50168383&lt;/li&gt;
+&lt;li&gt;Ahoo-Wang&lt;/li&gt;
+&lt;li&gt;AirTrioa&lt;/li&gt;
+&lt;li&gt;AlexanderWert&lt;/li&gt;
+&lt;li&gt;AlseinX&lt;/li&gt;
+&lt;li&gt;Ax1an&lt;/li&gt;
+&lt;li&gt;BFergerson&lt;/li&gt;
+&lt;li&gt;BZFYS&lt;/li&gt;
+&lt;li&gt;CharlesMaster&lt;/li&gt;
+&lt;li&gt;ChaunceyLin5152&lt;/li&gt;
+&lt;li&gt;CommissarXia&lt;/li&gt;
+&lt;li&gt;Cvimer&lt;/li&gt;
+&lt;li&gt;Doublemine&lt;/li&gt;
+&lt;li&gt;ElderJames&lt;/li&gt;
+&lt;li&gt;EvanLjp&lt;/li&gt;
+&lt;li&gt;FatihErdem&lt;/li&gt;
+&lt;li&gt;FeynmanZhou&lt;/li&gt;
+&lt;li&gt;Fine0830&lt;/li&gt;
+&lt;li&gt;FingerLiu&lt;/li&gt;
+&lt;li&gt;Gallardot&lt;/li&gt;
+&lt;li&gt;GerryYuan&lt;/li&gt;
+&lt;li&gt;HackerRookie&lt;/li&gt;
+&lt;li&gt;Heguoya&lt;/li&gt;
+&lt;li&gt;Hen1ng&lt;/li&gt;
+&lt;li&gt;Humbertzhang&lt;/li&gt;
+&lt;li&gt;IanCao&lt;/li&gt;
+&lt;li&gt;IluckySi&lt;/li&gt;
+&lt;li&gt;Indifer&lt;/li&gt;
+&lt;li&gt;J-Cod3r&lt;/li&gt;
+&lt;li&gt;JaredTan95&lt;/li&gt;
+&lt;li&gt;Jargon96&lt;/li&gt;
+&lt;li&gt;Jijun&lt;/li&gt;
+&lt;li&gt;JohnNiang&lt;/li&gt;
+&lt;li&gt;Jozdortraz&lt;/li&gt;
+&lt;li&gt;Jtrust&lt;/li&gt;
+&lt;li&gt;Just-maple&lt;/li&gt;
+&lt;li&gt;KangZhiDong&lt;/li&gt;
+&lt;li&gt;LazyLei&lt;/li&gt;
+&lt;li&gt;LiWenGu&lt;/li&gt;
+&lt;li&gt;Liu-XinYuan&lt;/li&gt;
+&lt;li&gt;Miss-you&lt;/li&gt;
+&lt;li&gt;O-ll-O&lt;/li&gt;
+&lt;li&gt;Patrick0308&lt;/li&gt;
+&lt;li&gt;QHWG67&lt;/li&gt;
+&lt;li&gt;Qiliang&lt;/li&gt;
+&lt;li&gt;RandyAbernethy&lt;/li&gt;
+&lt;li&gt;RedzRedz&lt;/li&gt;
+&lt;li&gt;Runrioter&lt;/li&gt;
+&lt;li&gt;SataQiu&lt;/li&gt;
+&lt;li&gt;ScienJus&lt;/li&gt;
+&lt;li&gt;SevenPointOld&lt;/li&gt;
+&lt;li&gt;ShaoHans&lt;/li&gt;
+&lt;li&gt;Shikugawa&lt;/li&gt;
+&lt;li&gt;SoberChina&lt;/li&gt;
+&lt;li&gt;SummerOfServenteen&lt;/li&gt;
+&lt;li&gt;TJ666&lt;/li&gt;
+&lt;li&gt;TerrellChen&lt;/li&gt;
+&lt;li&gt;TheRealHaui&lt;/li&gt;
+&lt;li&gt;TinyAllen&lt;/li&gt;
+&lt;li&gt;TomMD&lt;/li&gt;
+&lt;li&gt;ViberW&lt;/li&gt;
+&lt;li&gt;Videl&lt;/li&gt;
+&lt;li&gt;WALL-E&lt;/li&gt;
+&lt;li&gt;WeihanLi&lt;/li&gt;
+&lt;li&gt;WildWolfBang&lt;/li&gt;
+&lt;li&gt;WillemJiang&lt;/li&gt;
+&lt;li&gt;Wooo0&lt;/li&gt;
+&lt;li&gt;XhangUeiJong&lt;/li&gt;
+&lt;li&gt;Xlinlin&lt;/li&gt;
+&lt;li&gt;YczYanchengzhe&lt;/li&gt;
+&lt;li&gt;YoungHu&lt;/li&gt;
+&lt;li&gt;YunaiV&lt;/li&gt;
+&lt;li&gt;ZhHong&lt;/li&gt;
+&lt;li&gt;ZhuoSiChen&lt;/li&gt;
+&lt;li&gt;ZS-Oliver&lt;/li&gt;
+&lt;li&gt;a198720&lt;/li&gt;
+&lt;li&gt;a526672351&lt;/li&gt;
+&lt;li&gt;acurtain&lt;/li&gt;
+&lt;li&gt;adamni135&lt;/li&gt;
+&lt;li&gt;adermxzs&lt;/li&gt;
+&lt;li&gt;adriancole&lt;/li&gt;
+&lt;li&gt;aeolusheath&lt;/li&gt;
+&lt;li&gt;agile6v&lt;/li&gt;
+&lt;li&gt;aix3&lt;/li&gt;
+&lt;li&gt;aiyanbo&lt;/li&gt;
+&lt;li&gt;ajanthan&lt;/li&gt;
+&lt;li&gt;alexkarezin&lt;/li&gt;
+&lt;li&gt;alonelaval&lt;/li&gt;
+&lt;li&gt;amogege&lt;/li&gt;
+&lt;li&gt;amwyyyy&lt;/li&gt;
+&lt;li&gt;arugal&lt;/li&gt;
+&lt;li&gt;ascrutae&lt;/li&gt;
+&lt;li&gt;augustowebd&lt;/li&gt;
+&lt;li&gt;bai-yang&lt;/li&gt;
+&lt;li&gt;beckhampu&lt;/li&gt;
+&lt;li&gt;beckjin&lt;/li&gt;
+&lt;li&gt;beiwangnull&lt;/li&gt;
+&lt;li&gt;bigflybrother&lt;/li&gt;
+&lt;li&gt;bostin&lt;/li&gt;
+&lt;li&gt;brucewu-fly&lt;/li&gt;
+&lt;li&gt;c1ay&lt;/li&gt;
+&lt;li&gt;candyleer&lt;/li&gt;
+&lt;li&gt;carlvine500&lt;/li&gt;
+&lt;li&gt;carrypann&lt;/li&gt;
+&lt;li&gt;cheenursn&lt;/li&gt;
+&lt;li&gt;cheetah012&lt;/li&gt;
+&lt;li&gt;chenpengfei&lt;/li&gt;
+&lt;li&gt;chenvista&lt;/li&gt;
+&lt;li&gt;chess-equality&lt;/li&gt;
+&lt;li&gt;chestarss&lt;/li&gt;
+&lt;li&gt;chidaodezhongsheng&lt;/li&gt;
+&lt;li&gt;chopin-d&lt;/li&gt;
+&lt;li&gt;clevertension&lt;/li&gt;
+&lt;li&gt;clk1st&lt;/li&gt;
+&lt;li&gt;cngdkxw&lt;/li&gt;
+&lt;li&gt;codeglzhang&lt;/li&gt;
+&lt;li&gt;codelipenghui&lt;/li&gt;
+&lt;li&gt;coder-yqj&lt;/li&gt;
+&lt;li&gt;coki230&lt;/li&gt;
+&lt;li&gt;coolbeevip&lt;/li&gt;
+&lt;li&gt;crystaldust&lt;/li&gt;
+&lt;li&gt;cui-liqiang&lt;/li&gt;
+&lt;li&gt;cuiweiwei&lt;/li&gt;
+&lt;li&gt;cyberdak&lt;/li&gt;
+&lt;li&gt;cyejing&lt;/li&gt;
+&lt;li&gt;dagmom&lt;/li&gt;
+&lt;li&gt;dengliming&lt;/li&gt;
+&lt;li&gt;devkanro&lt;/li&gt;
+&lt;li&gt;devon-ye&lt;/li&gt;
+&lt;li&gt;dimaaan&lt;/li&gt;
+&lt;li&gt;dingdongnigetou&lt;/li&gt;
+&lt;li&gt;dio&lt;/li&gt;
+&lt;li&gt;dmsolr&lt;/li&gt;
+&lt;li&gt;dominicqi&lt;/li&gt;
+&lt;li&gt;donbing007&lt;/li&gt;
+&lt;li&gt;dsc6636926&lt;/li&gt;
+&lt;li&gt;duotai&lt;/li&gt;
+&lt;li&gt;dvsv2&lt;/li&gt;
+&lt;li&gt;dzx2018&lt;/li&gt;
+&lt;li&gt;echooymxq&lt;/li&gt;
+&lt;li&gt;efekaptan&lt;/li&gt;
+&lt;li&gt;eoeac&lt;/li&gt;
+&lt;li&gt;evanxuhe&lt;/li&gt;
+&lt;li&gt;feelwing1314&lt;/li&gt;
+&lt;li&gt;fgksgf&lt;/li&gt;
+&lt;li&gt;fuhuo&lt;/li&gt;
+&lt;li&gt;geektcp&lt;/li&gt;
+&lt;li&gt;geomonlin&lt;/li&gt;
+&lt;li&gt;ggndnn&lt;/li&gt;
+&lt;li&gt;gitter-badger&lt;/li&gt;
+&lt;li&gt;glongzh&lt;/li&gt;
+&lt;li&gt;gnr163&lt;/li&gt;
+&lt;li&gt;gonedays&lt;/li&gt;
+&lt;li&gt;grissom-grissom&lt;/li&gt;
+&lt;li&gt;grissomsh&lt;/li&gt;
+&lt;li&gt;guodongq&lt;/li&gt;
+&lt;li&gt;guyukou&lt;/li&gt;
+&lt;li&gt;gxthrj&lt;/li&gt;
+&lt;li&gt;gzshilu&lt;/li&gt;
+&lt;li&gt;hailin0&lt;/li&gt;
+&lt;li&gt;hanahmily&lt;/li&gt;
+&lt;li&gt;haotian2015&lt;/li&gt;
+&lt;li&gt;haoyann&lt;/li&gt;
+&lt;li&gt;hardzhang&lt;/li&gt;
+&lt;li&gt;harvies&lt;/li&gt;
+&lt;li&gt;hepyu&lt;/li&gt;
+&lt;li&gt;heyanlong&lt;/li&gt;
+&lt;li&gt;hi-sb&lt;/li&gt;
+&lt;li&gt;honganan&lt;/li&gt;
+&lt;li&gt;hsoftxl&lt;/li&gt;
+&lt;li&gt;huangyoje&lt;/li&gt;
+&lt;li&gt;huliangdream&lt;/li&gt;
+&lt;li&gt;huohuanhuan&lt;/li&gt;
+&lt;li&gt;innerpeacez&lt;/li&gt;
+&lt;li&gt;itsvse&lt;/li&gt;
+&lt;li&gt;jasonz93&lt;/li&gt;
+&lt;li&gt;jialong121&lt;/li&gt;
+&lt;li&gt;jinlongwang&lt;/li&gt;
+&lt;li&gt;jjlu521016&lt;/li&gt;
+&lt;li&gt;jjtyro&lt;/li&gt;
+&lt;li&gt;jmjoy&lt;/li&gt;
+&lt;li&gt;jsbxyyx&lt;/li&gt;
+&lt;li&gt;justeene&lt;/li&gt;
+&lt;li&gt;juzhiyuan&lt;/li&gt;
+&lt;li&gt;jy00464346&lt;/li&gt;
+&lt;li&gt;kaanid&lt;/li&gt;
+&lt;li&gt;karott&lt;/li&gt;
+&lt;li&gt;kayleyang&lt;/li&gt;
+&lt;li&gt;kevinyyyy&lt;/li&gt;
+&lt;li&gt;kezhenxu94&lt;/li&gt;
+&lt;li&gt;kikupotter&lt;/li&gt;
+&lt;li&gt;kilingzhang&lt;/li&gt;
+&lt;li&gt;killGC&lt;/li&gt;
+&lt;li&gt;klboke&lt;/li&gt;
+&lt;li&gt;ksewen&lt;/li&gt;
+&lt;li&gt;kuaikuai&lt;/li&gt;
+&lt;li&gt;kun-song&lt;/li&gt;
+&lt;li&gt;kylixs&lt;/li&gt;
+&lt;li&gt;landonzeng&lt;/li&gt;
+&lt;li&gt;langke93&lt;/li&gt;
+&lt;li&gt;langyan1022&lt;/li&gt;
+&lt;li&gt;langyizhao&lt;/li&gt;
+&lt;li&gt;lazycathome&lt;/li&gt;
+&lt;li&gt;leemove&lt;/li&gt;
+&lt;li&gt;leizhiyuan&lt;/li&gt;
+&lt;li&gt;libinglong&lt;/li&gt;
+&lt;li&gt;lilien1010&lt;/li&gt;
+&lt;li&gt;limfriend&lt;/li&gt;
+&lt;li&gt;linkinshi&lt;/li&gt;
+&lt;li&gt;linliaoy&lt;/li&gt;
+&lt;li&gt;liuhaoXD&lt;/li&gt;
+&lt;li&gt;liuhaoyang&lt;/li&gt;
+&lt;li&gt;liuyanggithup&lt;/li&gt;
+&lt;li&gt;liuzhengyang&lt;/li&gt;
+&lt;li&gt;liweiv&lt;/li&gt;
+&lt;li&gt;lkxiaolou&lt;/li&gt;
+&lt;li&gt;llissery&lt;/li&gt;
+&lt;li&gt;louis-zhou&lt;/li&gt;
+&lt;li&gt;lpf32&lt;/li&gt;
+&lt;li&gt;lsyf&lt;/li&gt;
+&lt;li&gt;lucperkins&lt;/li&gt;
+&lt;li&gt;lujiajing1126&lt;/li&gt;
+&lt;li&gt;lunamagic1978&lt;/li&gt;
+&lt;li&gt;lunchboxav&lt;/li&gt;
+&lt;li&gt;lxliuxuankb&lt;/li&gt;
+&lt;li&gt;lytscu&lt;/li&gt;
+&lt;li&gt;lyzhang1999&lt;/li&gt;
+&lt;li&gt;magic-akari&lt;/li&gt;
+&lt;li&gt;makingtime&lt;/li&gt;
+&lt;li&gt;maolie&lt;/li&gt;
+&lt;li&gt;masterxxo&lt;/li&gt;
+&lt;li&gt;maxiaoguang64&lt;/li&gt;
+&lt;li&gt;membphis&lt;/li&gt;
+&lt;li&gt;mestarshine&lt;/li&gt;
+&lt;li&gt;mgsheng&lt;/li&gt;
+&lt;li&gt;michaelsembwever&lt;/li&gt;
+&lt;li&gt;mikkeschiren&lt;/li&gt;
+&lt;li&gt;mm23504570&lt;/li&gt;
+&lt;li&gt;momo0313&lt;/li&gt;
+&lt;li&gt;moonming&lt;/li&gt;
+&lt;li&gt;mrproliu&lt;/li&gt;
+&lt;li&gt;muyun12&lt;/li&gt;
+&lt;li&gt;nacx&lt;/li&gt;
+&lt;li&gt;neatlife&lt;/li&gt;
+&lt;li&gt;neeuq&lt;/li&gt;
+&lt;li&gt;nic-chen&lt;/li&gt;
+&lt;li&gt;nikitap492&lt;/li&gt;
+&lt;li&gt;nileblack&lt;/li&gt;
+&lt;li&gt;nisiyong&lt;/li&gt;
+&lt;li&gt;novayoung&lt;/li&gt;
+&lt;li&gt;oatiz&lt;/li&gt;
+&lt;li&gt;oflebbe&lt;/li&gt;
+&lt;li&gt;olzhy&lt;/li&gt;
+&lt;li&gt;onecloud360&lt;/li&gt;
+&lt;li&gt;osiriswd&lt;/li&gt;
+&lt;li&gt;peng-yongsheng&lt;/li&gt;
+&lt;li&gt;pengweiqhca&lt;/li&gt;
+&lt;li&gt;potiuk&lt;/li&gt;
+&lt;li&gt;purgeyao&lt;/li&gt;
+&lt;li&gt;qijianbo010&lt;/li&gt;
+&lt;li&gt;qinhang3&lt;/li&gt;
+&lt;li&gt;qiuyu-d&lt;/li&gt;
+&lt;li&gt;qqeasonchen&lt;/li&gt;
+&lt;li&gt;qxo&lt;/li&gt;
+&lt;li&gt;raybi-asus&lt;/li&gt;
+&lt;li&gt;refactor2&lt;/li&gt;
+&lt;li&gt;remicollet&lt;/li&gt;
+&lt;li&gt;rlenferink&lt;/li&gt;
+&lt;li&gt;rootsongjc&lt;/li&gt;
+&lt;li&gt;rovast&lt;/li&gt;
+&lt;li&gt;scolia&lt;/li&gt;
+&lt;li&gt;sdanzo&lt;/li&gt;
+&lt;li&gt;seifeHu&lt;/li&gt;
+&lt;li&gt;shiluo34&lt;/li&gt;
+&lt;li&gt;sikelangya&lt;/li&gt;
+&lt;li&gt;simonlei&lt;/li&gt;
+&lt;li&gt;sk163&lt;/li&gt;
+&lt;li&gt;snakorse&lt;/li&gt;
+&lt;li&gt;songzhendong&lt;/li&gt;
+&lt;li&gt;songzhian&lt;/li&gt;
+&lt;li&gt;sonxy&lt;/li&gt;
+&lt;li&gt;spacewander&lt;/li&gt;
+&lt;li&gt;stalary&lt;/li&gt;
+&lt;li&gt;stenio2011&lt;/li&gt;
+&lt;li&gt;stevehu&lt;/li&gt;
+&lt;li&gt;stone-wlg&lt;/li&gt;
+&lt;li&gt;sungitly&lt;/li&gt;
+&lt;li&gt;surechen&lt;/li&gt;
+&lt;li&gt;swartz-k&lt;/li&gt;
+&lt;li&gt;sxzaihua&lt;/li&gt;
+&lt;li&gt;tanjunchen&lt;/li&gt;
+&lt;li&gt;tankilo&lt;/li&gt;
+&lt;li&gt;taskmgr&lt;/li&gt;
+&lt;li&gt;tbdpmi&lt;/li&gt;
+&lt;li&gt;terranhu&lt;/li&gt;
+&lt;li&gt;terrymanu&lt;/li&gt;
+&lt;li&gt;tevahp&lt;/li&gt;
+&lt;li&gt;thanq&lt;/li&gt;
+&lt;li&gt;thebouv&lt;/li&gt;
+&lt;li&gt;tianyuak&lt;/li&gt;
+&lt;li&gt;tincopper&lt;/li&gt;
+&lt;li&gt;tinyu0&lt;/li&gt;
+&lt;li&gt;tom-pytel&lt;/li&gt;
+&lt;li&gt;tristaZero&lt;/li&gt;
+&lt;li&gt;tristan-tsl&lt;/li&gt;
+&lt;li&gt;trustin&lt;/li&gt;
+&lt;li&gt;tsuilouis&lt;/li&gt;
+&lt;li&gt;tuohai666&lt;/li&gt;
+&lt;li&gt;tzsword-2020&lt;/li&gt;
+&lt;li&gt;tzy1316106836&lt;/li&gt;
+&lt;li&gt;vcjmhg&lt;/li&gt;
+&lt;li&gt;vision-ken&lt;/li&gt;
+&lt;li&gt;viswaramamoorthy&lt;/li&gt;
+&lt;li&gt;wankai123&lt;/li&gt;
+&lt;li&gt;wbpcode&lt;/li&gt;
+&lt;li&gt;web-xiaxia&lt;/li&gt;
+&lt;li&gt;webb2019&lt;/li&gt;
+&lt;li&gt;weiqiang333&lt;/li&gt;
+&lt;li&gt;wendal&lt;/li&gt;
+&lt;li&gt;wengangJi&lt;/li&gt;
+&lt;li&gt;wenjianzhang&lt;/li&gt;
+&lt;li&gt;whfjam&lt;/li&gt;
+&lt;li&gt;wind2008hxy&lt;/li&gt;
+&lt;li&gt;withlin&lt;/li&gt;
+&lt;li&gt;wqr2016&lt;/li&gt;
+&lt;li&gt;wu-sheng&lt;/li&gt;
+&lt;li&gt;wuguangkuo&lt;/li&gt;
+&lt;li&gt;wujun8&lt;/li&gt;
+&lt;li&gt;wuxingye&lt;/li&gt;
+&lt;li&gt;x22x22&lt;/li&gt;
+&lt;li&gt;xbkaishui&lt;/li&gt;
+&lt;li&gt;xcaspar&lt;/li&gt;
+&lt;li&gt;xiaoxiangmoe&lt;/li&gt;
+&lt;li&gt;xiaoy00&lt;/li&gt;
+&lt;li&gt;xinfeingxia85&lt;/li&gt;
+&lt;li&gt;xinzhuxiansheng&lt;/li&gt;
+&lt;li&gt;xudianyang&lt;/li&gt;
+&lt;li&gt;yanbw&lt;/li&gt;
+&lt;li&gt;yanfch&lt;/li&gt;
+&lt;li&gt;yang-xiaodong&lt;/li&gt;
+&lt;li&gt;yangxb2010000&lt;/li&gt;
+&lt;li&gt;yanickxia&lt;/li&gt;
+&lt;li&gt;yanmaipian&lt;/li&gt;
+&lt;li&gt;yanmingbi&lt;/li&gt;
+&lt;li&gt;yantaowu&lt;/li&gt;
+&lt;li&gt;yaowenqiang&lt;/li&gt;
+&lt;li&gt;yazong&lt;/li&gt;
+&lt;li&gt;ychandu&lt;/li&gt;
+&lt;li&gt;ycoe&lt;/li&gt;
+&lt;li&gt;yimeng&lt;/li&gt;
+&lt;li&gt;yu199195&lt;/li&gt;
+&lt;li&gt;yuqichou&lt;/li&gt;
+&lt;li&gt;yuyujulin&lt;/li&gt;
+&lt;li&gt;yymoth&lt;/li&gt;
+&lt;li&gt;zaunist&lt;/li&gt;
+&lt;li&gt;zaygrzx&lt;/li&gt;
+&lt;li&gt;zcai2&lt;/li&gt;
+&lt;li&gt;zeaposs&lt;/li&gt;
+&lt;li&gt;zhang98722&lt;/li&gt;
+&lt;li&gt;zhanghao001&lt;/li&gt;
+&lt;li&gt;zhangjianweibj&lt;/li&gt;
+&lt;li&gt;zhangkewei&lt;/li&gt;
+&lt;li&gt;zhangsean&lt;/li&gt;
+&lt;li&gt;zhaoyuguang&lt;/li&gt;
+&lt;li&gt;zhentaoJin&lt;/li&gt;
+&lt;li&gt;zhousiliang163&lt;/li&gt;
+&lt;li&gt;zhuCheer&lt;/li&gt;
+&lt;li&gt;zifeihan&lt;/li&gt;
+&lt;li&gt;zkscpqm&lt;/li&gt;
+&lt;li&gt;zoidbergwill&lt;/li&gt;
+&lt;li&gt;zoumingzm&lt;/li&gt;
+&lt;li&gt;zouyx&lt;/li&gt;
+&lt;li&gt;zshit&lt;/li&gt;
+&lt;li&gt;zxbu&lt;/li&gt;
+&lt;li&gt;zygfengyuwuzu&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: [Design] NGE2E - Next Generation End-to-End Testing Framework</title>
+      <link>/blog/e2e-design/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/e2e-design/</guid>
+      <description>
+        
+        
+        &lt;p&gt;NGE2E is the next generation End-to-End Testing framework that aims to help developers to set up, debug, and verify E2E tests with ease. It&amp;rsquo;s built based on the lessons learnt from tens of hundreds of test cases in the SkyWalking main repo.&lt;/p&gt;
+&lt;h1 id=&#34;goal&#34;&gt;Goal&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Keep the feature parity with the existing E2E framework in SkyWalking main repo;&lt;/li&gt;
+&lt;li&gt;Support both &lt;a href=&#34;https://docs.docker.com/compose/&#34;&gt;docker-compose&lt;/a&gt; and &lt;a href=&#34;https://kind.sigs.k8s.io&#34;&gt;KinD&lt;/a&gt; to orchestrate the tested services under different environments;&lt;/li&gt;
+&lt;li&gt;Get rid of the heavy &lt;code&gt;Java/Maven&lt;/code&gt; stack, which exists in the current E2E; be language independent as much as possible, users only need to configure YAMLs and run commands, without writing codes;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;non-goal&#34;&gt;Non-Goal&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;This framework is not involved with the build process, i.e. it won&amp;rsquo;t do something like &lt;code&gt;mvn package&lt;/code&gt; or &lt;code&gt;docker build&lt;/code&gt;, the artifacts (&lt;code&gt;.tar&lt;/code&gt;, docker images) should be ready in an earlier process before this;&lt;/li&gt;
+&lt;li&gt;This project doesn&amp;rsquo;t take the plugin tests into account, at least for now;&lt;/li&gt;
+&lt;li&gt;This project doesn&amp;rsquo;t mean to add/remove any new/existing test case to/from the main repo;&lt;/li&gt;
+&lt;li&gt;This documentation won&amp;rsquo;t cover too much technical details of how to implement the framework, that should go into an individual documentation;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;design&#34;&gt;Design&lt;/h1&gt;
+&lt;p&gt;Before diving into the design details, let&amp;rsquo;s take a quick look at how the end user might use NGE2E.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All the following commands are mock, and are open to debate.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To run a test case in a directory &lt;code&gt;/path/to/the/case/directory&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e run /path/to/the/case/directory
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# or&lt;/span&gt;
+
+cd /path/to/the/case/directory &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; e2e run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will run the test case in the specified directory, this command is a wrapper that glues all the following commands, which can be executed separately, for example, to debug the case:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: because all the options can be loaded from a configuration file, so as long as a configuration file (say &lt;code&gt;e2e.yaml&lt;/code&gt;) is given in the directory, every command should be able to run in bare mode (without any option explicitly specified in the command line);&lt;/p&gt;
+&lt;h3 id=&#34;set-up&#34;&gt;Set Up&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e setup --env&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;compose --file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;docker-compose.yaml --wait-for&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;service/health
+e2e setup --env&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;kind --file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;kind.yaml --manifests&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bookinfo.yaml,gateway.yaml --wait-for&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pod/ready
+e2e setup &lt;span style=&#34;color:#75715e&#34;&gt;# If configuration file e2e.yaml is present&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--env&lt;/code&gt;: the environment, may be &lt;code&gt;compose&lt;/code&gt; or &lt;code&gt;kind&lt;/code&gt;, represents docker-compose and KinD respectively;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--file&lt;/code&gt;: the &lt;code&gt;docker-compose.yaml&lt;/code&gt; or &lt;code&gt;kind.yaml&lt;/code&gt; file that declares how to set up the environment;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--manifests&lt;/code&gt;: for KinD, the resources files/directories to apply (using &lt;code&gt;kubectl apply -f&lt;/code&gt;);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--command&lt;/code&gt;: a command to run after the environment is started, this may be useful when users need to install some extra tools or apply resources from command line, like &lt;code&gt;istioctl install --profile=demo&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--wait-for&lt;/code&gt;: can be specified multiple times to give a list of conditions to be met; wait until the given conditions are met; the most frequently-used strategy should be &lt;code&gt;--wait-for=service/health&lt;/code&gt;, &lt;code&gt;--wait-for=deployments/available&lt;/code&gt;, etc. that make the &lt;code&gt;e2e setup&lt;/code&gt; command to wait for all conditions to be met; other possible strategies may be something like &lt;code&gt;--wait-for=&amp;quot;log:Started Successfully&amp;quot;&lt;/code&gt;, &lt;code&gt;--wait-for=&amp;quot;http:localhost:8080/healthcheck&amp;quot;&lt;/code&gt;, etc. if really needed;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;trigger-inputs&#34;&gt;Trigger Inputs&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e trigger --interval&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;3s --times&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; --action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http --url&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localhost:8080/users&amp;#34;&lt;/span&gt;
+e2e trigger --interval&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;3s --times&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; --action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;cmd --cmd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;curl localhost:8080/users&amp;#34;&lt;/span&gt;
+e2e trigger &lt;span style=&#34;color:#75715e&#34;&gt;# If configuration file e2e.yaml is present&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--interval=3s&lt;/code&gt;: trigger the action every 3 seconds;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--times=0&lt;/code&gt;: how many times to trigger the action, &lt;code&gt;0=infinite&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--action=http&lt;/code&gt;: the action of the trigger, i.e. &amp;ldquo;perform an http request as an input&amp;rdquo;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--action=cmd&lt;/code&gt;: the action of the trigger, i.e. &amp;ldquo;execute the &lt;code&gt;cmd&lt;/code&gt; as an input&amp;rdquo;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;query-output&#34;&gt;Query Output&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;swctl service ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;this is a project-specific step, different project may use different tools to query the actual output, for SkyWalking, it uses &lt;code&gt;swctl&lt;/code&gt; to query the actual output.&lt;/p&gt;
+&lt;h3 id=&#34;verify&#34;&gt;Verify&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e verify --actual&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;actual.data.yaml --expected&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;expected.data.yaml
+e2e verify --query&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;swctl service ls&amp;#34;&lt;/span&gt; --expected&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;expected.data.yaml
+e2e verify &lt;span style=&#34;color:#75715e&#34;&gt;# If configuration file e2e.yaml is present&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--actual&lt;/code&gt;: the actual data file, only YAML file format is supported;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--expected&lt;/code&gt;: the expected data file, only YAML file format is supported;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--query&lt;/code&gt;: the query to get the actual data, the query result must have the same format as &lt;code&gt;--actual&lt;/code&gt; and &lt;code&gt;--expected&lt;/code&gt;;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;--query&lt;/code&gt; option will get the output into a temporary file and use the &lt;code&gt;--actual&lt;/code&gt; under the hood;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e cleanup --env&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;compose --file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;docker-compose.yaml
+e2e cleanup --env&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;kind --file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;kind.yaml --resources&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bookinfo.yaml,gateway.yaml
+e2e cleanup &lt;span style=&#34;color:#75715e&#34;&gt;# If configuration file e2e.yaml is present&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This step requires the same options in the setup step so that it can clean up all things necessarily.&lt;/p&gt;
+&lt;h3 id=&#34;summarize&#34;&gt;Summarize&lt;/h3&gt;
+&lt;p&gt;To summarize, the directory structure of a test case might be&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;case-name
+├── agent-service        # optional, an arbitrary project that is used in the docker-compose.yaml if needed
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src
+├── docker-compose.yaml
+├── e2e.yaml             # see a sample below
+└── testdata
+    ├── expected.endpoints.service1.yaml
+    ├── expected.endpoints.service2.yaml
+    └── expected.services.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;or&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;case-name
+├── kind.yaml
+├── bookinfo
+│   ├── bookinfo.yaml
+│   └── bookinfo-gateway.yaml
+├── e2e.yaml             # see a sample below
+└── testdata
+    ├── expected.endpoints.service1.yaml
+    ├── expected.endpoints.service2.yaml
+    └── expected.services.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;a sample of &lt;code&gt;e2e.yaml&lt;/code&gt; may be&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;setup&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;env&lt;/span&gt;: kind
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;: kind.yaml
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;manifests&lt;/span&gt;:
+    - &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: bookinfo.yaml
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;wait&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# you can have multiple conditions to wait&lt;/span&gt;
+        - &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt;: bookinfo
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;label-selector&lt;/span&gt;: app=product
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;: deployment/available
+        - &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt;: reviews
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;label-selector&lt;/span&gt;: app=product
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;: deployment/available
+        - &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt;: ratings
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;label-selector&lt;/span&gt;: app=product
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;: deployment/available
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;run&lt;/span&gt;:
+    - &lt;span style=&#34;color:#66d9ef&#34;&gt;command&lt;/span&gt;: | &lt;span style=&#34;color:#75715e&#34;&gt;# it can be a shell script or anything executable&lt;/span&gt;
+        istioctl install --profile=demo -y
+        kubectl label namespace default istio-injection=enabled
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;wait&lt;/span&gt;:
+        - &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt;: istio-system
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;label-selector&lt;/span&gt;: app=istiod
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;: deployment/available
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;# OR&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# env: compose&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# file: docker-compose.yaml&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;trigger&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;action&lt;/span&gt;: http
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;interval&lt;/span&gt;: 3s
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;times&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;9090&lt;/span&gt;/users
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;verify&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;query&lt;/span&gt;: swctl service ls
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;expected&lt;/span&gt;: expected.services.yaml
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;query&lt;/span&gt;: swctl endpoint ls --service=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;YnVzaW5lc3Mtem9uZTo6cHJvamVjdEM=.1&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;expected&lt;/span&gt;: expected.projectC.endpoints.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;then a single command should do the trick.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;modules&#34;&gt;Modules&lt;/h1&gt;
+&lt;p&gt;This project is divided into the following modules.&lt;/p&gt;
+&lt;h2 id=&#34;controller&#34;&gt;Controller&lt;/h2&gt;
+&lt;p&gt;A controller command (&lt;code&gt;e2e run&lt;/code&gt;) composes all the steps declared in the &lt;code&gt;e2e.yaml&lt;/code&gt;, it should be progressive and clearly display which step is currently running. If it failed in a step, the error message should be as much comprehensive as possible. An example of the output might be&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;e2e run
+✔ Started Kind Cluster - Cluster Name
+✔ Checked Pods Readiness - All pods are ready
+? Generating Traffic - http localhost:9090/users (progress spinner)
+✔ Verified Output - service ls
+(progress spinner) Verifying Output - endpoint ls
+✘ Failed to Verify Output Data - endpoint ls
+  &amp;lt;the diff content&amp;gt;
+✔ Clean Up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Compared with running the steps one by one, the controller is also responsible for cleaning up env (by executing &lt;code&gt;cleanup&lt;/code&gt; command) no mater what status other commands are, even if they are failed, the controller has the following semantics in terms of &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;cleanup&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Java
+try {
+    setup();
+    // trigger step
+    // verify step
+    // ...
+} finally {
+    cleanup();
+}
+
+// GoLang
+func run() {
+    setup();
+    defer cleanup();
+    // trigger step
+    // verify step
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;initializer&#34;&gt;Initializer&lt;/h2&gt;
+&lt;p&gt;The initializer is responsible for&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;When &lt;code&gt;env==compose&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start the &lt;code&gt;docker-compose&lt;/code&gt; services;&lt;/li&gt;
+&lt;li&gt;Check the services&amp;rsquo; healthiness;&lt;/li&gt;
+&lt;li&gt;Wait until all services are ready according to the &lt;code&gt;interval&lt;/code&gt;, etc.;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When &lt;code&gt;env==kind&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start the KinD cluster according to the config files;&lt;/li&gt;
+&lt;li&gt;Apply the resources files (&lt;code&gt;--manifests&lt;/code&gt;) or/and run the custom init command (&lt;code&gt;--commands&lt;/code&gt;);&lt;/li&gt;
+&lt;li&gt;Check the pods&amp;rsquo; readiness;&lt;/li&gt;
+&lt;li&gt;Wait until all pods are ready according to the &lt;code&gt;interval&lt;/code&gt;, etc.;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;verifier&#34;&gt;Verifier&lt;/h2&gt;
+&lt;p&gt;According to scenarios we have at the moment, the must-have features are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Matchers&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Exact match&lt;/li&gt;
+&lt;li&gt;Not null&lt;/li&gt;
+&lt;li&gt;Not empty&lt;/li&gt;
+&lt;li&gt;Greater than 0&lt;/li&gt;
+&lt;li&gt;Regexp match&lt;/li&gt;
+&lt;li&gt;At least one of list element match&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Functions&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Base64 encode/decode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;in order to help to identify simple bugs from the GitHub Actions workflow, there are some &amp;ldquo;nice to have&amp;rdquo; features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Printing the diff content when verification failed is a super helpful bonus proved in the Python agent repo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;logging&#34;&gt;Logging&lt;/h1&gt;
+&lt;p&gt;When a test case failed, all the necessary logs should be collected into a dedicated directory, which could be uploaded to the GitHub Artifacts for downloading and analysis;&lt;/p&gt;
+&lt;p&gt;Logs through the entire process of a test case are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;KinD clusters logs;&lt;/li&gt;
+&lt;li&gt;Containers/pods logs;&lt;/li&gt;
+&lt;li&gt;The logs from the NGE2E itself;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;more-planned&#34;&gt;More Planned&lt;/h1&gt;
+&lt;h2 id=&#34;debugging&#34;&gt;Debugging&lt;/h2&gt;
+&lt;p&gt;Debugging the E2E locally has been a strong requirement and time killer that we haven&amp;rsquo;t solve up to date, though we have enhancements like &lt;a href=&#34;https://github.com/apache/skywalking/pull/5198&#34;&gt;https://github.com/apache/skywalking/pull/5198&lt;/a&gt; , but in this framework, we will adopt a new method to &amp;ldquo;really&amp;rdquo; support debugging locally.&lt;/p&gt;
+&lt;p&gt;The most common case when debugging is to run the E2E tests, with one or more services forwarded into the host machine, where the services are run in the IDE or in debug mode.&lt;/p&gt;
+&lt;p&gt;For example, you may run the SkyWalking OAP server in an IDE and run &lt;code&gt;e2e run&lt;/code&gt;, expecting the other services (e.g. agent services, SkyWalking WebUI, etc.) inside the containers to connect to your local OAP, instead of the one declared in &lt;code&gt;docker-compose.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For Docker Desktop Mac/Windows, we can access the services running on the host machine inside containers via &lt;code&gt;host.docker.internal&lt;/code&gt;, for Linux, it&amp;rsquo;s &lt;code&gt;172.17.0.1&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;One possible solution is to add an option &lt;code&gt;--debug-services=oap,other-service-name&lt;/code&gt; that rewrites all the router rules inside the containers from &lt;code&gt;oap&lt;/code&gt; to &lt;code&gt;host.docker.internal&lt;/code&gt;/&lt;code&gt;172.17.0.1&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;codegen&#34;&gt;CodeGen&lt;/h2&gt;
+&lt;p&gt;When adding new test case, a code generator would be of great value to eliminate the repeated labor and copy-pasting issues.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;e2e new &amp;lt;&lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt;-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Observe Service Mesh with SkyWalking and Envoy Access Log Service</title>
-      <link>https://skywalking.apache.org/blog/2020-12-03-obs-service-mesh-with-sw-and-als/</link>
+      <link>/blog/2020-12-03-obs-service-mesh-with-sw-and-als/</link>
       <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-12-03-obs-service-mesh-with-sw-and-als/</guid>
+      <guid>/blog/2020-12-03-obs-service-mesh-with-sw-and-als/</guid>
       <description>
         
         
@@ -84,63 +854,63 @@ If you are looking for a more efficient solution to observe your service mesh in
 &lt;h3 id=&#34;installing-kubernetes&#34;&gt;Installing Kubernetes&lt;/h3&gt;
 &lt;p&gt;SkyWalking 8.3.0 supports the Envoy ALS solution under both Kubernetes environment and virtual machines (VM) environment, in this tutorial, we’ll only focus on the Kubernetes scenario, for VM solution, please stay tuned for our next blog, so we need to install Kubernetes before taking further steps.&lt;/p&gt;
 &lt;p&gt;In this tutorial, we will use the &lt;a href=&#34;https://minikube.sigs.k8s.io/docs/&#34;&gt;Minikube&lt;/a&gt; tool to quickly set up a local Kubernetes(v1.17) cluster for testing. In order to run all the needed components, including the bookinfo application, the SkyWalking OAP and WebUI, the cluster may need up to 4GB RAM and 2 CPU cores.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;minikube start --memory&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4096&lt;/span&gt; --cpus&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;minikube start --memory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4096&lt;/span&gt; --cpus&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, run &lt;code&gt;kubectl get pods --namespace=kube-system --watch&lt;/code&gt; to check whether all the Kubernetes components are ready. If not, wait for the readiness before going on.&lt;/p&gt;
 &lt;h3 id=&#34;installing-istio&#34;&gt;Installing Istio&lt;/h3&gt;
 &lt;p&gt;Istio provides a very convenient way to configure the Envoy proxy and enable the access log service. The built-in configuration profiles free us from lots of manual operations. So, for demonstration purposes, we will use Istio through this tutorial.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ISTIO_VERSION&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;1.7.1
-curl -L https://istio.io/downloadIstio &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sh - 
-sudo mv &lt;span style=&#34;color:#000&#34;&gt;$PWD&lt;/span&gt;/istio-&lt;span style=&#34;color:#000&#34;&gt;$ISTIO_VERSION&lt;/span&gt;/bin/istioctl /usr/local/bin/
-istioctl  install --set &lt;span style=&#34;color:#000&#34;&gt;profile&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;demo
-kubectl label namespace default istio-injection&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;enabled
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;export ISTIO_VERSION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.7.1
+curl -L https://istio.io/downloadIstio | sh - 
+sudo mv $PWD/istio-$ISTIO_VERSION/bin/istioctl /usr/local/bin/
+istioctl  install --set profile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;demo
+kubectl label namespace default istio-injection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;enabled
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Run &lt;code&gt;kubectl get pods --namespace=istio-system --watch&lt;/code&gt; to check whether all the Istio components are ready. If not, wait for the readiness before going on.&lt;/p&gt;
 &lt;h3 id=&#34;enabling-als&#34;&gt;Enabling ALS&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;demo&lt;/code&gt; profile doesn’t enable ALS by default. We need to reconfigure it to enable ALS via some configuration.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;istioctl  manifest install &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set meshConfig.enableEnvoyAccessLogService&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set meshConfig.defaultConfig.envoyAccessLogService.address&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;skywalking-oap.istio-system:11800
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;istioctl  manifest install &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set meshConfig.enableEnvoyAccessLogService&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set meshConfig.defaultConfig.envoyAccessLogService.address&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;skywalking-oap.istio-system:11800
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The example command &lt;code&gt;--set meshConfig.enableEnvoyAccessLogService=true&lt;/code&gt; enables the Envoy access log service in the mesh. And as we said earlier, ALS is essentially a gRPC service that emits requests logs. The config &lt;code&gt;meshConfig.defaultConfig.envoyAccessLogService.address=skywalking-oap.istio-system:11800&lt;/code&gt; tells this gRPC service  where to emit the logs, say &lt;code&gt;skywalking-oap.istio-system:11800&lt;/code&gt;, where we will deploy the SkyWalking ALS receiver later.&lt;/p&gt;
 &lt;p&gt;NOTE:
 You can also enable the ALS when installing Istio so that you don’t need to restart Istio after installation:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;istioctl install --set &lt;span style=&#34;color:#000&#34;&gt;profile&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;demo &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set meshConfig.enableEnvoyAccessLogService&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set meshConfig.defaultConfig.envoyAccessLogService.address&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;skywalking-oap.istio-system:11800
-kubectl label namespace default istio-injection&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;enabled
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;istioctl install --set profile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;demo &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set meshConfig.enableEnvoyAccessLogService&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set meshConfig.defaultConfig.envoyAccessLogService.address&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;skywalking-oap.istio-system:11800
+kubectl label namespace default istio-injection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;enabled
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;deploying-apache-skywalking&#34;&gt;Deploying Apache SkyWalking&lt;/h3&gt;
 &lt;p&gt;The SkyWalking community provides a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart to make it easier to deploy SkyWalking and its dependent services in Kubernetes. The Helm Chart can be found at the &lt;a href=&#34;https://github.com/apache/skywalking-kubernetes&#34;&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Install Helm&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Install Helm&lt;/span&gt;
 curl -sSLO https://get.helm.sh/helm-v3.0.0-linux-amd64.tar.gz
-sudo tar xz -C /usr/local/bin --strip-components&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; linux-amd64/helm -f helm-v3.0.0-linux-amd64.tar.gz
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Clone SkyWalking Helm Chart&lt;/span&gt;
+sudo tar xz -C /usr/local/bin --strip-components&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; linux-amd64/helm -f helm-v3.0.0-linux-amd64.tar.gz
+&lt;span style=&#34;color:#75715e&#34;&gt;# Clone SkyWalking Helm Chart&lt;/span&gt;
 git clone https://github.com/apache/skywalking-kubernetes
-&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; skywalking-kubernetes/chart
+cd skywalking-kubernetes/chart
 git reset --hard dd749f25913830c47a97430618cefc4167612e75
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Update dependencies&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Update dependencies&lt;/span&gt;
 helm dep up skywalking
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Deploy SkyWalking&lt;/span&gt;
-helm -n istio-system install skywalking skywalking &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set oap.storageType&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;h2&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set ui.image.tag&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;8.3.0 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set oap.image.tag&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;8.3.0-es7 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set oap.replicas&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set oap.env.SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;k8s-mesh &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set oap.env.JAVA_OPTS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;-Dmode=&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set oap.envoy.als.enabled&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;               --set elasticsearch.enabled&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Deploy SkyWalking&lt;/span&gt;
+helm -n istio-system install skywalking skywalking &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set oap.storageType&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;h2&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set ui.image.tag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;8.3.0 &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set oap.image.tag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;8.3.0-es7 &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set oap.replicas&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set oap.env.SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;k8s-mesh &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set oap.env.JAVA_OPTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-Dmode=&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set oap.envoy.als.enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;               --set elasticsearch.enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;false
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We deploy SkyWalking to the namespace &lt;code&gt;istio-system&lt;/code&gt;, so that SkyWalking OAP service can be accessed by &lt;code&gt;skywalking-oap.istio-system:11800&lt;/code&gt;, to which we told ALS to emit their logs, in the previous step.&lt;/p&gt;
 &lt;p&gt;We also enable the ALS analyzer in the SkyWalking OAP: &lt;code&gt;oap.env.SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS=k8s-mesh&lt;/code&gt;. The analyzer parses the access logs and maps the IP addresses in the logs to the real service names in the Kubernetes, to build a topology.&lt;/p&gt;
 &lt;p&gt;In order to retrieve the metadata (such as Pod IP and service names) from a Kubernetes cluster for IP mappings, we also set &lt;code&gt;oap.envoy.als.enabled=true&lt;/code&gt;, to apply for a &lt;code&gt;ClusterRole&lt;/code&gt; that has access to the metadata.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;POD_NAME&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get pods -A -l &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;app=skywalking,release=skywalking,component=ui&amp;#34;&lt;/span&gt; -o name&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;$POD_NAME&lt;/span&gt;
-kubectl -n istio-system port-forward &lt;span style=&#34;color:#000&#34;&gt;$POD_NAME&lt;/span&gt; 8080:8080
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;export POD_NAME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;kubectl get pods -A -l &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;app=skywalking,release=skywalking,component=ui&amp;#34;&lt;/span&gt; -o name&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+echo $POD_NAME
+kubectl -n istio-system port-forward $POD_NAME 8080:8080
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now navigate your browser to http://localhost:8080 . You should be able to see the SkyWalking dashboard. The dashboard is empty for now, but after we deploy the demo application and generate traffic, it should be filled up later.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;Screen-Shot-2020-12-02-at-3.01.03-PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;deploying-bookinfo-application&#34;&gt;Deploying Bookinfo application&lt;/h3&gt;
 &lt;p&gt;Run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ISTIO_VERSION&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;1.7.1
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/&lt;span style=&#34;color:#000&#34;&gt;$ISTIO_VERSION&lt;/span&gt;/samples/bookinfo/platform/kube/bookinfo.yaml
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/&lt;span style=&#34;color:#000&#34;&gt;$ISTIO_VERSION&lt;/span&gt;/samples/bookinfo/networking/bookinfo-gateway.yaml
-kubectl &lt;span style=&#34;color:#204a87&#34;&gt;wait&lt;/span&gt; --for&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;condition&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;Ready pods --all --timeout&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;1200s
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;export ISTIO_VERSION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.7.1
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/$ISTIO_VERSION/samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/$ISTIO_VERSION/samples/bookinfo/networking/bookinfo-gateway.yaml
+kubectl wait --for&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;condition&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Ready pods --all --timeout&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1200s
 minikube tunnel
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then navigate your browser to http://localhost/productpage. You should be able to see the typical bookinfo application. Refresh the webpage several times to generate enough access logs.&lt;/p&gt;
 &lt;h3 id=&#34;done&#34;&gt;Done!&lt;/h3&gt;
@@ -172,10 +942,10 @@ If you want to  have commercial support for the ALS solution or hybrid mesh obse
     
     <item>
       <title>Blog: The first design of Satellite 0.1.0</title>
-      <link>https://skywalking.apache.org/blog/2020-11-25-skywalking-satellite-0.1.0-design/</link>
+      <link>/blog/2020-11-25-skywalking-satellite-0.1.0-design/</link>
       <pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-11-25-skywalking-satellite-0.1.0-design/</guid>
+      <guid>/blog/2020-11-25-skywalking-satellite-0.1.0-design/</guid>
       <description>
         
         
@@ -399,10 +1169,10 @@ If you want to  have commercial support for the ALS solution or hybrid mesh obse
     
     <item>
       <title>Blog: [Video] Another backend storage solution for the APM system</title>
-      <link>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-shardingsphere/</link>
+      <link>/blog/2020-11-21-apachecon-obs-shardingsphere/</link>
       <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-shardingsphere/</guid>
+      <guid>/blog/2020-11-21-apachecon-obs-shardingsphere/</guid>
       <description>
         
         
@@ -419,10 +1189,10 @@ If you want to  have commercial support for the ALS solution or hybrid mesh obse
     
     <item>
       <title>Blog: [Video] Improve Apache APISIX observability with Apache SkyWalking</title>
-      <link>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-apisix/</link>
+      <link>/blog/2020-11-21-apachecon-obs-apisix/</link>
       <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-apisix/</guid>
+      <guid>/blog/2020-11-21-apachecon-obs-apisix/</guid>
       <description>
         
         
@@ -438,10 +1208,10 @@ If you want to  have commercial support for the ALS solution or hybrid mesh obse
     
     <item>
       <title>Blog: [Video] SourceMarker - Continuous Feedback for Developers</title>
-      <link>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-sourcemarker/</link>
+      <link>/blog/2020-11-21-apachecon-obs-sourcemarker/</link>
       <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-sourcemarker/</guid>
+      <guid>/blog/2020-11-21-apachecon-obs-sourcemarker/</guid>
       <description>
         
         
@@ -458,10 +1228,10 @@ If you want to  have commercial support for the ALS solution or hybrid mesh obse
     
     <item>
       <title>Blog: [Video] The history of distributed tracing storage</title>
-      <link>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-storage/</link>
+      <link>/blog/2020-11-21-apachecon-obs-storage/</link>
       <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-11-21-apachecon-obs-storage/</guid>
+      <guid>/blog/2020-11-21-apachecon-obs-storage/</guid>
       <description>
         
         
@@ -478,10 +1248,10 @@ If you want to  have commercial support for the ALS solution or hybrid mesh obse
     
     <item>
       <title>Blog: [Video] Apache grows in China</title>
-      <link>https://skywalking.apache.org/blog/2020-11-21-apachecon-keynote/</link>
+      <link>/blog/2020-11-21-apachecon-keynote/</link>
       <pubDate>Fri, 20 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-11-21-apachecon-keynote/</guid>
+      <guid>/blog/2020-11-21-apachecon-keynote/</guid>
       <description>
         
         
@@ -499,10 +1269,10 @@ Many developers have joined the ASF as new contributors, committers, foundation 
     
     <item>
       <title>Blog: Features in SkyWalking 8.2: Browser Side Monitoring; Query Traces by Tags; Meter Analysis Language</title>
-      <link>https://skywalking.apache.org/blog/2020-10-29-skywalking8-2-release/</link>
+      <link>/blog/2020-10-29-skywalking8-2-release/</link>
       <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-10-29-skywalking8-2-release/</guid>
+      <guid>/blog/2020-10-29-skywalking8-2-release/</guid>
       <description>
         
         
@@ -547,10 +1317,10 @@ Many developers have joined the ASF as new contributors, committers, foundation 
     
     <item>
       <title>Blog: Observability at Scale: SkyWalking it is</title>
-      <link>https://skywalking.apache.org/blog/2020-08-11-observability-at-scale/</link>
+      <link>/blog/2020-08-11-observability-at-scale/</link>
       <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-08-11-observability-at-scale/</guid>
+      <guid>/blog/2020-08-11-observability-at-scale/</guid>
       <description>
         
         
@@ -641,10 +1411,10 @@ Many developers have joined the ASF as new contributors, committers, foundation 
     
     <item>
       <title>Blog: Features in SkyWalking 8.1: SpringSleuth metrics, endpoint dependency detection, Kafka transport traces and metrics</title>
-      <link>https://skywalking.apache.org/blog/2020-08-03-skywalking8-1-release/</link>
+      <link>/blog/2020-08-03-skywalking8-1-release/</link>
       <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-08-03-skywalking8-1-release/</guid>
+      <guid>/blog/2020-08-03-skywalking8-1-release/</guid>
       <description>
         
         
@@ -687,10 +1457,10 @@ Many developers have joined the ASF as new contributors, committers, foundation 
     
     <item>
       <title>Blog: The Apdex Score for Measuring Service Mesh Health</title>
-      <link>https://skywalking.apache.org/blog/2020-07-26-apdex-and-skywalking/</link>
+      <link>/blog/2020-07-26-apdex-and-skywalking/</link>
       <pubDate>Sun, 26 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-07-26-apdex-and-skywalking/</guid>
+      <guid>/blog/2020-07-26-apdex-and-skywalking/</guid>
       <description>
         
         
@@ -777,10 +1547,10 @@ Apdex Score  =  ------------------------------------------------------
     
     <item>
       <title>Blog: Apache SkyWalking: Use Profiling to Fix the Blind Spot of Distributed Tracing</title>
-      <link>https://skywalking.apache.org/blog/2020-04-13-apache-skywalking-profiling/</link>
+      <link>/blog/2020-04-13-apache-skywalking-profiling/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-04-13-apache-skywalking-profiling/</guid>
+      <guid>/blog/2020-04-13-apache-skywalking-profiling/</guid>
       <description>
         
         
@@ -851,10 +1621,10 @@ try {
     
     <item>
       <title>Blog: SkyWalking hits 200 contributors mark</title>
-      <link>https://skywalking.apache.org/blog/2020-01-20-celebrate-200th-contributor/</link>
+      <link>/blog/2020-01-20-celebrate-200th-contributor/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2020-01-20-celebrate-200th-contributor/</guid>
+      <guid>/blog/2020-01-20-celebrate-200th-contributor/</guid>
       <description>
         
         
@@ -890,10 +1660,10 @@ At the moment of graduation in spring 2019, the project had 100 contributors. No
     
     <item>
       <title>Blog: SkyWalking alarm webhook sharing</title>
-      <link>https://skywalking.apache.org/blog/2019-09-25-alarm-webhook-share/</link>
+      <link>/blog/2019-09-25-alarm-webhook-share/</link>
       <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2019-09-25-alarm-webhook-share/</guid>
+      <guid>/blog/2019-09-25-alarm-webhook-share/</guid>
       <description>
         
         
@@ -912,26 +1682,26 @@ At the moment of graduation in spring 2019, the project had 100 contributors. No
 &lt;ul&gt;
 &lt;li&gt;install&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;go get -u github.com/weiqiang333/infra-skywalking-webhook
-&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;$GOPATH&lt;/span&gt;/src/github.com/weiqiang333/infra-skywalking-webhook/
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;go get -u github.com/weiqiang333/infra-skywalking-webhook
+cd $GOPATH/src/github.com/weiqiang333/infra-skywalking-webhook/
 bash build/build.sh
-./bin/infra-skywalking-webhook &lt;span style=&#34;color:#204a87&#34;&gt;help&lt;/span&gt;
+./bin/infra-skywalking-webhook help
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Configuration&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;main configs file&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;configs/production.yml&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dingtalk&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;p3&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;token...&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;main configs file&lt;/span&gt;: configs/production.yml
+&lt;span style=&#34;color:#66d9ef&#34;&gt;dingtalk&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;p3&lt;/span&gt;: token...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Example&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./bin/infra-skywalking-webhook --config configs/production.yml --address 0.0.0.0:8000
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./bin/infra-skywalking-webhook --config configs/production.yml --address 0.0.0.0:8000
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;SkyWalking backend alarm settings&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;webhooks&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- http&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;//&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;127.0.0.1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;8000&lt;/span&gt;/dingtalk&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;collaboration&#34;&gt;Collaboration&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;webhooks&lt;/span&gt;:
+  - http://&lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;8000&lt;/span&gt;/dingtalk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;collaboration&#34;&gt;Collaboration&lt;/h2&gt;
 &lt;p&gt;Hope that we can improve together &lt;a href=&#34;https://github.com/weiqiang333/infra-skywalking-webhook&#34;&gt;webhook&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;SkyWalking alarm rules may add more metric names (eg priority name), we can send different channels by locating different levels of alerts (dingtalk / SMS / phone)&lt;/p&gt;
 &lt;p&gt;Thanks.&lt;/p&gt;
@@ -941,10 +1711,10 @@ bash build/build.sh
     
     <item>
       <title>Blog: SkyWalking performance in Service Mesh scenario</title>
-      <link>https://skywalking.apache.org/blog/2019-01-25-mesh-loadtest/</link>
+      <link>/blog/2019-01-25-mesh-loadtest/</link>
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2019-01-25-mesh-loadtest/</guid>
+      <guid>/blog/2019-01-25-mesh-loadtest/</guid>
       <description>
         
         
@@ -1005,10 +1775,10 @@ bash build/build.sh
     
     <item>
       <title>Blog: Understand distributed trace easier in the incoming 6-GA</title>
-      <link>https://skywalking.apache.org/blog/2019-01-01-understand-trace/</link>
+      <link>/blog/2019-01-01-understand-trace/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2019-01-01-understand-trace/</guid>
+      <guid>/blog/2019-01-01-understand-trace/</guid>
       <description>
         
         
@@ -1069,10 +1839,10 @@ bash build/build.sh
     
     <item>
       <title>Blog: SkyWalking v6 is Service Mesh ready</title>
-      <link>https://skywalking.apache.org/blog/2018-12-12-skywalking-service-mesh-ready/</link>
+      <link>/blog/2018-12-12-skywalking-service-mesh-ready/</link>
       <pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2018-12-12-skywalking-service-mesh-ready/</guid>
+      <guid>/blog/2018-12-12-skywalking-service-mesh-ready/</guid>
       <description>
         
         
@@ -1174,10 +1944,10 @@ This is why we are embracing Skywalking, which makes service performance observa
     
     <item>
       <title>Blog: Apache SkyWalking provides open source APM and distributed tracing in .NET Core field</title>
-      <link>https://skywalking.apache.org/blog/2018-05-24-skywalking-net/</link>
+      <link>/blog/2018-05-24-skywalking-net/</link>
       <pubDate>Thu, 24 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/blog/2018-05-24-skywalking-net/</guid>
+      <guid>/blog/2018-05-24-skywalking-net/</guid>
       <description>
         
         
