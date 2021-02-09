@@ -13,6 +13,392 @@
     
     
     <item>
+      <title>Blog: SkyWalking 8.4 provides infrastructure monitoring</title>
+      <link>/blog/2021-02-07-infrastructure-monitoring/</link>
+      <pubDate>Mon, 08 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021-02-07-infrastructure-monitoring/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;img src=&#34;apache-skywalking.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Origin: &lt;a href=&#34;https://www.tetrate.io/blog/skywalking-8-4-provides-infrastucture-monitoring-for-vms/&#34;&gt;Tetrate.io blog&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;Apache SkyWalking&amp;ndash; the APM tool for distributed systems&amp;ndash;  has historically focused on providing observability around tracing and metrics, but service performance is often affected by the host. The newest release, SkyWalking 8.4.0, introduces a new  feature for monitoring  virtual machines. Users can easily detect possible problems from the dashboard&amp;ndash; for example, when CPU usage is overloaded, when there’s not enough memory or disk space, or when the network status is unhealthy, etc.&lt;/p&gt;
+&lt;h2 id=&#34;how-it-works&#34;&gt;How it works&lt;/h2&gt;
+&lt;p&gt;SkyWalking leverages Prometheus and OpenTelemetry for collecting metrics data as we did for Istio control panel metrics; Prometheus is mature and widely used, and we expect to see increased adoption of the new CNCF project, OpenTelemetry. The SkyWalking OAP Server receives these metrics data of OpenCensus format from OpenTelemetry. The process is as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;how-it-works.png&#34; alt=&#34;The monitring work process&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Prometheus Node Exporter collects metrics data from the VMs.&lt;/li&gt;
+&lt;li&gt;OpenTelemetry Collector fetches metrics from Node Exporters via Prometheus Receiver,  and pushes metrics to SkyWalking OAP Server via the OpenCensus GRPC Exporter.&lt;/li&gt;
+&lt;li&gt;The SkyWalking OAP Server parses the expression with &lt;a href=&#34;https://github.com/apache/skywalking/blob/master/docs/en/concepts-and-designs/mal.md&#34;&gt;MAL&lt;/a&gt; to filter/calculate/aggregate and store the results. The expression rules are in &lt;code&gt;/config/otel-oc-rules/vm.yaml&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We can now see the data on the SkyWalking WebUI dashboard.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;what-to-monitor&#34;&gt;What to monitor&lt;/h2&gt;
+&lt;p&gt;SkyWalking provides default monitoring metrics including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU Usage (%)&lt;/li&gt;
+&lt;li&gt;Memory RAM Usage (MB)&lt;/li&gt;
+&lt;li&gt;Memory Swap Usage (MB)&lt;/li&gt;
+&lt;li&gt;CPU Average Used&lt;/li&gt;
+&lt;li&gt;CPU Load&lt;/li&gt;
+&lt;li&gt;Memory RAM (total/available/used MB)&lt;/li&gt;
+&lt;li&gt;Memory Swap (total/free MB)&lt;/li&gt;
+&lt;li&gt;File System Mount point Usage (%)&lt;/li&gt;
+&lt;li&gt;Disk R/W (KB/s)&lt;/li&gt;
+&lt;li&gt;Network Bandwidth Usage (receive/transmit KB/s)&lt;/li&gt;
+&lt;li&gt;Network Status (tcp_curr_estab/tcp_tw/tcp_alloc/sockets_used/udp_inuse)&lt;/li&gt;
+&lt;li&gt;File fd Allocated&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following is how it looks when we monitor Linux:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;monitoring-screen-shot1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;monitoring-screen-shot2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;how-to-use&#34;&gt;How to use&lt;/h2&gt;
+&lt;p&gt;To enable this feature, we need to install Prometheus Node Exporter and OpenTelemetry Collector and activate the VM monitoring rules in SkyWalking OAP Server.&lt;/p&gt;
+&lt;h3 id=&#34;install-prometheus-node-exporter&#34;&gt;Install Prometheus Node Exporter&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;wget https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
+tar xvfz node_exporter-1.0.1.linux-amd64.tar.gz
+cd node_exporter-1.0.1.linux-amd64
+./node_exporter
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In linux Node Exporter  exposes metrics on port &lt;code&gt;9100&lt;/code&gt; by default. When it is running, we can get the metrics  from the &lt;code&gt;/metrics&lt;/code&gt; endpoint. Use a web browser or command &lt;code&gt;curl&lt;/code&gt; to verify.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;curl http://localhost:9100/metrics
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We should see all the metrics from the output like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# TYPE go_gc_duration_seconds summary&lt;/span&gt;
+go_gc_duration_seconds&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;quantile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; 7.7777e-05
+go_gc_duration_seconds&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;quantile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0.25&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; 0.000113756
+go_gc_duration_seconds&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;quantile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0.5&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; 0.000127199
+go_gc_duration_seconds&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;quantile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0.75&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; 0.000147778
+go_gc_duration_seconds&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;quantile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; 0.000371894
+go_gc_duration_seconds_sum 0.292994058
+go_gc_duration_seconds_count &lt;span style=&#34;color:#ae81ff&#34;&gt;2029&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note: We only need to install Node Exporter,  rather than Prometheus server.
+If you want to get more information about Prometheus Node Exporter  see: &lt;a href=&#34;https://prometheus.io/docs/guides/node-exporter/&#34;&gt;https://prometheus.io/docs/guides/node-exporter/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-opentelemetry-collector&#34;&gt;Install OpenTelemetry Collector&lt;/h3&gt;
+&lt;p&gt;We can quickly install a OpenTelemetry Collector instance by using &lt;code&gt;docker-compose&lt;/code&gt; with the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a directory to store the configuration files, like &lt;code&gt;/usr/local/otel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Create &lt;code&gt;docker-compose.yaml&lt;/code&gt; and &lt;code&gt;otel-collector-config.yaml&lt;/code&gt; in this directory represented below:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;docker-compose.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;version&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;services&lt;/span&gt;:
+  &lt;span style=&#34;color:#75715e&#34;&gt;# Collector&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;otel-collector&lt;/span&gt;:
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Specify the image to start the container from&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;image&lt;/span&gt;: otel/opentelemetry-collector:&lt;span style=&#34;color:#ae81ff&#34;&gt;0.19.0&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Set the  otel-collector configfile &lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;command&lt;/span&gt;: [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;--config=/etc/otel-collector-config.yaml&amp;#34;&lt;/span&gt;]
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Mapping the configfile to host directory&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;volumes&lt;/span&gt;:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;ports&lt;/span&gt;:
+      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;13133:13133&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# health_check extension&lt;/span&gt;
+      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;55678&amp;#34;&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;# OpenCensus receiver&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;otel-collector-config.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;extensions&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;health_check&lt;/span&gt;:
+&lt;span style=&#34;color:#75715e&#34;&gt;# A receiver is how data gets into the OpenTelemetry Collector&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;receivers&lt;/span&gt;:
+  &lt;span style=&#34;color:#75715e&#34;&gt;# Set Prometheus Receiver to collects metrics from targets&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# It’s supports the full set of Prometheus configuration&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;prometheus&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;config&lt;/span&gt;:
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;scrape_configs&lt;/span&gt;:
+        - &lt;span style=&#34;color:#66d9ef&#34;&gt;job_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;otel-collector&amp;#39;&lt;/span&gt;
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;scrape_interval&lt;/span&gt;: 10s
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;static_configs&lt;/span&gt;: 
+              &lt;span style=&#34;color:#75715e&#34;&gt;# Replace the IP to your VMs‘s IP which has installed Node Exporter&lt;/span&gt;
+            - &lt;span style=&#34;color:#66d9ef&#34;&gt;targets&lt;/span&gt;: [ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;vm1:9100&amp;#39;&lt;/span&gt; ] 
+            - &lt;span style=&#34;color:#66d9ef&#34;&gt;targets&lt;/span&gt;: [ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;vm2:9100&amp;#39;&lt;/span&gt; ]
+            - &lt;span style=&#34;color:#66d9ef&#34;&gt;targets&lt;/span&gt;: [ ‘vm3:&lt;span style=&#34;color:#ae81ff&#34;&gt;9100&lt;/span&gt;&amp;#39; ]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;processors&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;batch&lt;/span&gt;:
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# An exporter is how data gets sent to different systems/back-ends&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;exporters&lt;/span&gt;:
+  &lt;span style=&#34;color:#75715e&#34;&gt;# Exports metrics via gRPC using OpenCensus format&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;opencensus&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;endpoint&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;docker.for.mac.host.internal:11800&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# The OAP Server address&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;insecure&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;logging&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;logLevel&lt;/span&gt;: debug
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;service&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;pipelines&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;receivers&lt;/span&gt;: [prometheus]
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;processors&lt;/span&gt;: [batch]
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;exporters&lt;/span&gt;: [logging, opencensus]
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;extensions&lt;/span&gt;: [health_check]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;In this  directory use command &lt;code&gt;docker-compose&lt;/code&gt; to start up the container:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After the container is up and running, you should see metrics already exported in the logs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;...
+Metric &lt;span style=&#34;color:#75715e&#34;&gt;#165&lt;/span&gt;
+Descriptor:
+-&amp;gt; Name: node_network_receive_compressed_total
+-&amp;gt; Description: Network device statistic receive_compressed.
+-&amp;gt; Unit:
+-&amp;gt; DataType: DoubleSum
+-&amp;gt; IsMonotonic: true
+-&amp;gt; AggregationTemporality: AGGREGATION_TEMPORALITY_CUMULATIVE
+DoubleDataPoints &lt;span style=&#34;color:#75715e&#34;&gt;#0&lt;/span&gt;
+Data point labels:
+-&amp;gt; device: ens4
+StartTime: &lt;span style=&#34;color:#ae81ff&#34;&gt;1612234754364000000&lt;/span&gt;
+Timestamp: &lt;span style=&#34;color:#ae81ff&#34;&gt;1612235563448000000&lt;/span&gt;
+Value: 0.000000
+DoubleDataPoints &lt;span style=&#34;color:#75715e&#34;&gt;#1&lt;/span&gt;
+Data point labels:
+-&amp;gt; device: lo
+StartTime: &lt;span style=&#34;color:#ae81ff&#34;&gt;1612234754364000000&lt;/span&gt;
+Timestamp: &lt;span style=&#34;color:#ae81ff&#34;&gt;1612235563448000000&lt;/span&gt;
+Value: 0.000000
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you want to get more information about OpenTelemetry Collector  see: &lt;a href=&#34;https://opentelemetry.io/docs/collector/&#34;&gt;https://opentelemetry.io/docs/collector/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;set-up-skywalking-oap-server&#34;&gt;Set up SkyWalking OAP Server&lt;/h3&gt;
+&lt;p&gt;To activate the oc handler and vm relevant rules, set your environment variables:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SW_OTEL_RECEIVER=default
+SW_OTEL_RECEIVER_ENABLED_OC_RULES=vm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note: If there are other rules already activated , you can add vm with use &lt;code&gt;,&lt;/code&gt; as a separator.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SW_OTEL_RECEIVER_ENABLED_OC_RULES=vm,oap
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Start the SkyWalking OAP Server.&lt;/p&gt;
+&lt;h3 id=&#34;done&#34;&gt;Done!&lt;/h3&gt;
+&lt;p&gt;After all of the above steps are completed, check out the SkyWalking WebUI.  Dashboard &lt;code&gt;VM&lt;/code&gt; provides the default metrics of all observed virtual machines.
+Note: Clear the browser local cache if you used it to access deployments of  previous SkyWalking versions.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;monitoring-screen-shot3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;additional-resources&#34;&gt;Additional Resources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Read more about the &lt;a href=&#34;https://github.com/apache/skywalking/blob/v8.4.0/changes/changes-8.4.0.md&#34;&gt;SkyWalking 8.4 release highlights&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Get more SkyWalking updates on &lt;a href=&#34;https://twitter.com/ASFSkyWalking&#34;&gt;Twitter&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Apache SkyWalking 8.4: Logs, VM Monitoring, and Dynamic Configurations at Agent Side</title>
+      <link>/blog/skywalking8-4-release/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/skywalking8-4-release/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;img src=&#34;heading.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Origin: &lt;a href=&#34;https://www.tetrate.io/blog/skywalking-8-4/&#34;&gt;Tetrate.io blog&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Apache SkyWalking team today announced the 8.4 release is generally available. This release fills the gap between all previous versions of SkyWalking and the logging domain area.
+The release also advances SkyWalking’s capabilities  for infrastructure observability, starting with virtual machine monitoring.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;SkyWalking has historically focused on the tracing and metrics fields of observability.
+As its features for tracing, metrics and service level monitoring have become more and more powerful and stable, the SkyWalking team has started to explore new scenarios covered by observability.
+Because service performance is reflected in the logs, and is highly impacted by the infrastructure on which it runs, SkyWalking brings these two fields into the 8.4 release.
+This release blog briefly introduces the two new features as well as some other notable changes.&lt;/p&gt;
+&lt;h2 id=&#34;logs&#34;&gt;Logs&lt;/h2&gt;
+&lt;p&gt;Metrics, tracing, and logging are considered the three pillars of observability [1]. SkyWalking had the full features of metrics and tracing prior to 8.4; today, as 8.4 is released, the last piece of the jigsaw is now in place.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;figure01.png&#34; alt=&#34;Logs Collected By SkyWalking&#34;&gt;
+Figure 1: Logs Collected By SkyWalking&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;figure02.png&#34; alt=&#34;Logs Collected By SkyWalking&#34;&gt;
+Figure 2: Logs Collected By SkyWalking&lt;/p&gt;
+&lt;p&gt;The Java agent firstly provides SDKs to enhance the widely-used logging frameworks, log4j (1.x and 2.x) [2] and logback [3], and send the logs to the SkyWalking backend (OAP).
+The latter is able to collect logs from wherever the protocol is  implemented.
+This is not a big deal, but when it comes to the correlation between logs and traces, the traditional solution is to print the trace IDs in the logs, and pick the IDs in the error logs to query the related traces.
+SkyWalking just simplifies the workflow by correlating the logs and traces natively. Navigating between traces and their related logs is as simple as clicking a button.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;figure03.png&#34; alt=&#34;Correlation Between Logs and Traces&#34;&gt;
+Figure 3: Correlation Between Logs and Traces&lt;/p&gt;
+&lt;h2 id=&#34;infrastructure-monitoring&#34;&gt;Infrastructure Monitoring&lt;/h2&gt;
+&lt;p&gt;SkyWalking is known as an application performance monitoring tool. One of the most important factors that impacts the application’s performance is the infrastructure on which the application runs.
+In the 8.4 release, we added the monitoring metrics of virtual machines into the dashboard.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;figure04.png&#34; alt=&#34;VM Metrics&#34;&gt;
+Figure 4: VM Metrics&lt;/p&gt;
+&lt;p&gt;Fundamental metrics such as &lt;code&gt;CPU Used&lt;/code&gt;, &lt;code&gt;Memory Used&lt;/code&gt;,  &lt;code&gt;Disk Read / Write&lt;/code&gt; and &lt;code&gt;Network Usage&lt;/code&gt; are available on the dashboard.
+And as usual, those metrics are also available to be configured as alarm triggers when needed.&lt;/p&gt;
+&lt;h2 id=&#34;dynamic-configurations-at-agent-side&#34;&gt;Dynamic Configurations at Agent Side&lt;/h2&gt;
+&lt;p&gt;Dynamic configuration at the backend side has long existed in SkyWalking for several versions. Now, it finally comes to the agent side!
+Prior to 8.4, you’d have to restart the target services when you modify some configuration items of the agent &amp;ndash; for instance, sampling rate (agent side), ignorable endpoint paths, etc. Now, say goodbye to rebooting.
+Modifying configurations is not the only usage of the dynamic configuration mechanism. The latter gives countless possibilities to the agent side in terms of dynamic behaviours, e.g. enabling / disabling plugins, enabling / disabling the whole agent, etc. Just imagine!&lt;/p&gt;
+&lt;h2 id=&#34;grouped-service-topology&#34;&gt;Grouped Service Topology&lt;/h2&gt;
+&lt;p&gt;This enhancement is from the UI. SkyWalking backend supports grouping the services by user-defined dimensions. In a real world use case, the services are usually grouped by business group or department. When a developer opens the topology map, out of hundreds of services, he or she may just want to focus on the services in charge. The grouped service topology comes to the rescue: one can now choose to display only services belonging to a specified group.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;figure05.png&#34; alt=&#34;Grouped Service Topology&#34;&gt;
+Figure 5: Grouped Service Topology&lt;/p&gt;
+&lt;h2 id=&#34;other-notable-enhancements&#34;&gt;Other Notable Enhancements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Agent: resolves domain names to look up backend service IP addresses.&lt;/li&gt;
+&lt;li&gt;Backend: meter receiver supports meter analysis language (MAL).&lt;/li&gt;
+&lt;li&gt;Backend: several CVE fixes.&lt;/li&gt;
+&lt;li&gt;Backend: supports Envoy &lt;code&gt;{AccessLog,Metrics}Service&lt;/code&gt; API V3 and adopts MAL.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[1] &lt;a href=&#34;https://peter.bourgon.org/blog/2017/02/21/metrics-tracing-and-logging.html&#34;&gt;https://peter.bourgon.org/blog/2017/02/21/metrics-tracing-and-logging.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[2] &lt;a href=&#34;https://logging.apache.org/log4j/2.x/&#34;&gt;https://logging.apache.org/log4j/2.x/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[3] &lt;a href=&#34;http://logback.qos.ch&#34;&gt;http://logback.qos.ch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;additional-resources&#34;&gt;Additional Resources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Read more about the &lt;a href=&#34;https://github.com/apache/skywalking/blob/v8.4.0/changes/changes-8.4.0.md&#34;&gt;SkyWalking 8.4 release highlights&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Get more SkyWalking updates on &lt;a href=&#34;https://twitter.com/ASFSkyWalking&#34;&gt;Twitter&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: [Design] The Verifier of NGE2E</title>
+      <link>/blog/2021-02-01-e2e-verifier-design/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021-02-01-e2e-verifier-design/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;The verifier is an important part of the next generation End-to-End Testing framework (NGE2E), which is responsible for verifying whether the actual output satisfies the expected template.&lt;/p&gt;
+&lt;h2 id=&#34;design-thinking&#34;&gt;Design Thinking&lt;/h2&gt;
+&lt;p&gt;We will implement the verifier with &lt;a href=&#34;https://golang.org/pkg/text/template/&#34;&gt;Go template&lt;/a&gt;, plus some enhancements. Firstly, users need to write a Go template file with provided functions and actions to describe how the expected data looks like. Then the verifer renders the template with the actual data object. Finally, the verifier compares the rendered output with the actual data. If the rendered output is not the same with the actual output, it means the actual data is inconsist with the expected data. Otherwise, it means the actual data match the expected data. On failure, the verifier will also print out what are different between expected and actual data.&lt;/p&gt;
+&lt;h2 id=&#34;branches--actions&#34;&gt;Branches / Actions&lt;/h2&gt;
+&lt;p&gt;The verifier inherits all the actions from the standard Go template, such as &lt;code&gt;if&lt;/code&gt;, &lt;code&gt;with&lt;/code&gt;, &lt;code&gt;range&lt;/code&gt;, etc. In addition, we also provide some custom actions to satisfy our own needs.&lt;/p&gt;
+&lt;h3 id=&#34;list-elements-match&#34;&gt;List Elements Match&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;contains&lt;/code&gt; checks if the actual list contains elements that match the given template.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+{{- contains .metrics }}
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: {{ notEmpty .name }}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ notEmpty .id }}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: {{ gt .value &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; }}
+{{- end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It means that the list &lt;code&gt;metrics&lt;/code&gt; must contain an element whose &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;id&lt;/code&gt; are not empty, and &lt;code&gt;value&lt;/code&gt; is greater than &lt;code&gt;0&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+{{- contains .metrics }}
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: p95
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: {{ gt .value &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; }}
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: p99
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: {{ gt .value &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; }}
+{{- end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This means that the list &lt;code&gt;metrics&lt;/code&gt; must contain an element named &lt;code&gt;p95&lt;/code&gt; with a &lt;code&gt;value&lt;/code&gt; greater than 0, and an element named &lt;code&gt;p95&lt;/code&gt; with a &lt;code&gt;value&lt;/code&gt; greater than 0. Besides the two element, the list &lt;code&gt;metrics&lt;/code&gt; may or may not have other random elements.&lt;/p&gt;
+&lt;h2 id=&#34;functions&#34;&gt;Functions&lt;/h2&gt;
+&lt;p&gt;Users can use these provided functions in the template to describe the expected data.&lt;/p&gt;
+&lt;h3 id=&#34;not-empty&#34;&gt;Not Empty&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;notEmpty&lt;/code&gt; checks if the string &lt;code&gt;s&lt;/code&gt; is empty.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ notEmpty .id }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;regexp-match&#34;&gt;Regexp match&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;regexp&lt;/code&gt; checks if string &lt;code&gt;s&lt;/code&gt; matches the regular expression pattern.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;label&lt;/span&gt;: {{ regexp .label &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ratings.*&amp;#34;&lt;/span&gt; }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;base64&#34;&gt;Base64&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;b64enc s&lt;/code&gt; returns the Base64 encoded string of s.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt; }}.static-suffix &lt;span style=&#34;color:#75715e&#34;&gt;# this evalutes the base64 encoded string of &amp;#34;User&amp;#34;, concatenated with a static suffix &amp;#34;.static-suffix&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Result:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: VXNlcg==.static-suffix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;full-example&#34;&gt;Full Example&lt;/h2&gt;
+&lt;p&gt;Here is an example of expected data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# expected.data.yaml&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;nodes&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: User
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: USER
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;isReal&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Your_ApplicationName&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Your_ApplicationName
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: Tomcat
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;isReal&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ $h2ID := (index .nodes &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;).id }}{{ notEmpty $h2ID }} &lt;span style=&#34;color:#75715e&#34;&gt;# We assert that nodes[2].id is not empty and save it to variable `h2ID` for later use&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: localhost:-&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: H2
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;isReal&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;calls&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ notEmpty (index .calls &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;).id }}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;source&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Your_ApplicationName&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;target&lt;/span&gt;: {{ $h2ID }} &lt;span style=&#34;color:#75715e&#34;&gt;# We use the previously assigned variable `h2Id` to asert that the `target` is equal to the `id` of the nodes[2]&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;detectPoints&lt;/span&gt;:
+      - CLIENT
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;-{{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Your_ApplicationName&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;source&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;target&lt;/span&gt;: {{ b64enc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Your_ApplicationName&amp;#34;&lt;/span&gt; }}.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;detectPoints&lt;/span&gt;:
+      - SERVER
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;will validate this data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# actual.data.yaml&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;nodes&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: VXNlcg==.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: User
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: USER
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;isReal&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: WW91cl9BcHBsaWNhdGlvbk5hbWU=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Your_ApplicationName
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: Tomcat
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;isReal&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: bG9jYWxob3N0Oi0x&lt;span style=&#34;color:#ae81ff&#34;&gt;.0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: localhost:-&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: H2
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;isReal&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;calls&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: WW91cl9BcHBsaWNhdGlvbk5hbWU=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;-bG9jYWxob3N0Oi0x&lt;span style=&#34;color:#ae81ff&#34;&gt;.0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;source&lt;/span&gt;: WW91cl9BcHBsaWNhdGlvbk5hbWU=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;detectPoints&lt;/span&gt;:
+      - CLIENT
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;target&lt;/span&gt;: bG9jYWxob3N0Oi0x&lt;span style=&#34;color:#ae81ff&#34;&gt;.0&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: VXNlcg==.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;-WW91cl9BcHBsaWNhdGlvbk5hbWU=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;source&lt;/span&gt;: VXNlcg==.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;detectPoints&lt;/span&gt;:
+      - SERVER
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;target&lt;/span&gt;: WW91cl9BcHBsaWNhdGlvbk5hbWU=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# expected.data.yaml&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+{{- contains .metrics }}
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: {{ notEmpty .name }}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: {{ notEmpty .id }}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: {{ gt .value &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; }}
+{{- end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;will validate this data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# actual.data.yaml&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: business-zone::projectA
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: YnVzaW5lc3Mtem9uZTo6cHJvamVjdEE=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: system::load balancer1
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: c3lzdGVtOjpsb2FkIGJhbGFuY2VyMQ==.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: system::load balancer2
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: c3lzdGVtOjpsb2FkIGJhbGFuY2VyMg==.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and will report an error when validating this data, because there is no element with a value greater than 0:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# actual.data.yaml&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: business-zone::projectA
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: YnVzaW5lc3Mtem9uZTo6cHJvamVjdEE=.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: system::load balancer1
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: c3lzdGVtOjpsb2FkIGJhbGFuY2VyMQ==.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: system::load balancer2
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;id&lt;/span&gt;: c3lzdGVtOjpsb2FkIGJhbGFuY2VyMg==.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;contains&lt;/code&gt; does an unordered list verification, in order to do list verifications including orders, you can simply use the basic ruls like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# expected.data.yaml&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;metrics&lt;/span&gt;:
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: p99
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: {{ gt (index .metrics &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;).value &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; }}
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: p95
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;value&lt;/span&gt;: {{ gt (index .metrics &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;).value &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;which expects the actual &lt;code&gt;metrics&lt;/code&gt; list to be exactly ordered, with first element named &lt;code&gt;p99&lt;/code&gt; and &lt;code&gt;value&lt;/code&gt; greater 0, second element named &lt;code&gt;p95&lt;/code&gt; and &lt;code&gt;value&lt;/code&gt; greater 0.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: [Resolved][License Issue] Tencent Cloud TSW service violates the Apache 2.0 License when using SkyWalking.</title>
       <link>/blog/2021-01-23-tencent-cloud-violates-aplv2/</link>
       <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
